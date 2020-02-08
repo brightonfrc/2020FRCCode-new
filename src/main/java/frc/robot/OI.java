@@ -60,7 +60,5 @@ public class OI {
     zAxis = stick.getZ();
     twistAxis = stick.getTwist();
     throttleAxis = stick.getThrottle();
-
-    System.out.println(yAxis);
   }
 }

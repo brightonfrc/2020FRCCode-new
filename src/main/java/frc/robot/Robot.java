@@ -11,8 +11,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.DriverControls;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.DriverControls;
+
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -30,7 +31,6 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static DriveTrain driveTrain;
   public static Shooter shooter;
-  public static DriverControls driverControls;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -45,8 +45,7 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     shooter = new Shooter();
 
-    driverControls = new DriverControls();
-
+    CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);

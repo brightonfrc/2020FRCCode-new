@@ -13,15 +13,12 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Shooter extends SubsystemBase {
-   private VictorSPX shooterMotor1;
 
   public Shooter() {
-    shooterMotor1 = new VictorSPX(1);
   }
 
   @Override
   public void periodic() {
-    shooterMotor1.set(ControlMode.PercentOutput, 1);
   }
 }
 

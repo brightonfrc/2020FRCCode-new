@@ -28,7 +28,9 @@ public class DriverControls extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.driveTrain.tankDrive(Robot.oi.yAxis, Robot.oi.throttleAxis);
+    System.out.println(Robot.oi.yAxis);
+    Robot.driveTrain.setLeftMotors(Robot.oi.yAxis);
+    Robot.driveTrain.setRightMotors(-Robot.oi.throttleAxis);
   }
 
   // Called once the command ends or is interrupted.
