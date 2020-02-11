@@ -18,8 +18,6 @@ public final class Main {
   private Main() {
     
   }
-  /*EXAMPLE COMMENT*/
-
   /**
    * Main initialization function. Do not perform any initialization here.
    *

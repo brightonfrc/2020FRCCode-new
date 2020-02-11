@@ -10,9 +10,10 @@ package frc.robot;
 import com.revrobotics.ColorMatch;
 
 import edu.wpi.first.wpilibj.util.Color;
+import edu.wpi.first.wpilibj.I2C;
 
 /**
- * The RobotMap is a mapping from the ports sensors and actuators are wired into
+ * The Constnts.java is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
@@ -22,6 +23,10 @@ public class Constants {
   public static final int MOTOR_LEFT_2_ID = 2;
   public static final int MOTOR_RIGHT_1_ID = 3;
   public static final int MOTOR_RIGHT_2_ID = 4;
+
+  public static final int WHEEL_OF_FORTUNE_MOTOR_ID = 5;
+
+  public static final I2C.Port COLOR_SENSOR_I2C_PORT = I2C.Port.kOnboard;
 
   // robot constants
 
@@ -41,9 +46,15 @@ public class Constants {
   public static final double DRIVETRAIN_POSITION_TOLERANCE = 1;
 
 
+  // Wheel of fortune code
+  public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.5; 
 
+  // Color control rotations
+  public static final int MIN_COLOR_CONTROL_ROTATIONS = 3;
+  public static final int MAX_COLOR_CONTROL_ROTATIONS = 5;
+  public static final int NUMBER_OF_REPETITIONS_OF_COLOR_PER_TURN = 2;
 
-  // Colours
+  // Colors
   public static double[] BLUE_VALUES = {0.143, 0.427, 0.429} ;
   public static double[] GREEN_VALUES = {0.197, 0.561, 0.240};
   public static double[] RED_VALUES = {0.561, 0.232, 0.114};

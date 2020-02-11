@@ -15,6 +15,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
 
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
@@ -31,6 +32,7 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static DriveTrain driveTrain;
   public static Shooter shooter;
+  public static WheelOfFortune wheelOfFortune;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
     oi = new OI();
     driveTrain = new DriveTrain();
     shooter = new Shooter();
+    wheelOfFortune = new WheelOfFortune();
 
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
 

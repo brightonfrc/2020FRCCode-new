@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.DriverControls;
 import frc.robot.customDatatypes.DriveSignal;
+import frc.robot.customDatatypes.Twist2d;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -89,23 +90,23 @@ public class DriveTrain extends SubsystemBase {
     tankDrive(leftSpeed, rightSpeed);
   }
 
-  // // TODO: do not forget to change the OI input
-  // public void curvatureDrive(final double throttle, final double curvatureInput,
-  //     final double inverseKinematicsTurnThreshold) {
-  //   // get the required amount of motor powers to turn
-  //   final DriveSignal signal = DriveSignal.inverseKinematics(new Twist2d(throttle, 0.0, curvatureInput),
-  //       inverseKinematicsTurnThreshold);
-  //   // make sure that no motors go above 100% speed
-  //   final double scalingFactor = Math.max(1.0,
-  //       Math.max(Math.abs(signal.getLeftPercentage()), Math.abs(signal.getRightPercentage())));
-  //   // apply the scale factor
-  //   tankDrive(signal.getLeftPercentage() / scalingFactor, signal.getRightPercentage() / scalingFactor);
-  // }
+  // TODO: do not forget to change the OI input
+  public void curvatureDrive(double throttle, double curvatureInput,
+      double inverseKinematicsTurnThreshold) {
+    // get the required amount of motor powers to turn
+    final DriveSignal signal = DriveSignal.inverseKinematics(new Twist2d(throttle, 0.0, curvatureInput),
+        inverseKinematicsTurnThreshold);
+    // make sure that no motors go above 100% speed
+    final double scalingFactor = Math.max(1.0,
+        Math.max(Math.abs(signal.getLeftPercentage()), Math.abs(signal.getRightPercentage())));
+    // apply the scale factor
+    tankDrive(signal.getLeftPercentage() / scalingFactor, signal.getRightPercentage() / scalingFactor);
+  }
 
-  // // if no threshold
-  // public void curvatureDrive(final double throttle, final double curvatureInput) {
-  //   curvatureDrive(throttle, curvatureInput, 0.0);
-  // }
+  // if no threshold
+  public void curvatureDrive(final double throttle, final double curvatureInput) {
+    curvatureDrive(throttle, curvatureInput, 0.0);
+  }
 
   // public void quickTurn(final double rotationSpeed) {
   //   tankDrive(rotationSpeed, -rotationSpeed);
