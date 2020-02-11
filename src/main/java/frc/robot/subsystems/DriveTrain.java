@@ -7,13 +7,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.DriverControls;
 import frc.robot.customDatatypes.DriveSignal;
-import frc.robot.customDatatypes.Twist2d;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -54,24 +51,43 @@ public class DriveTrain extends SubsystemBase {
     super.setDefaultCommand(new DriverControls());
   }
 
-  // // TODO: check if user input is less than epsilon in OI
+  public void setLeftMotors(double speed){
+    this.m_motorLeft1.set(ControlMode.PercentOutput, speed);
+  }
 
-  // // Put methods for controlling this subsystem
-  // // here. Call these from Commands.
+  public void setRightMotors(double speed){
+    this.m_motorRight1.set(ControlMode.PercentOutput, speed);
+  }
 
-  // // drives with set speeds for each side of motors
-  // public void tankDrive(final double leftSpeed, final double rightSpeed) {
-  //   m_differentialDrive.tankDrive(leftSpeed, rightSpeed);
-  // }
+  // TODO: check if user input is less than epsilon in OI
 
-  // public void tankDrive(final DriveSignal driveSignal) {
-  //   m_differentialDrive.tankDrive(driveSignal.getLeftPercentage(), driveSignal.getRightPercentage());
-  // }
+  // Put methods for controlling this subsystem
+  // here. Call these from Commands.
 
-  // // drive with a forward speed and rotation speed
-  // public void arcadeDrive(final double moveSpeed, final double rotateSpeed) {
-  //   m_differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
-  // }
+  // drives with set speeds for each side of motors
+  public void tankDrive(final double leftSpeed, final double rightSpeed) {
+    setLeftMotors(-leftSpeed);
+    setRightMotors(rightSpeed);
+  }
+
+  public void tankDrive(final DriveSignal driveSignal) {
+    setLeftMotors(driveSignal.getLeftPercentage());
+    setRightMotors(driveSignal.getRightPercentage());
+  }
+
+  // drive with a forward speed and rotation speed
+  public void arcadeDrive(final double moveSpeed, final double rotateSpeed) {
+    double leftSpeed = moveSpeed + rotateSpeed;
+    double rightSpeed = moveSpeed - rotateSpeed;
+
+    // make sure that the motors do not go above 100%
+    double scalingFactor = Math.max(1.0, Math.max(Math.abs(leftSpeed), Math.abs(rightSpeed)));
+
+    leftSpeed /= scalingFactor;
+    rightSpeed /= scalingFactor;
+
+    tankDrive(leftSpeed, rightSpeed);
+  }
 
   // // TODO: do not forget to change the OI input
   // public void curvatureDrive(final double throttle, final double curvatureInput,
@@ -94,14 +110,4 @@ public class DriveTrain extends SubsystemBase {
   // public void quickTurn(final double rotationSpeed) {
   //   tankDrive(rotationSpeed, -rotationSpeed);
   // }
-
-  public void setLeftMotors(double speed){
-    this.m_motorLeft1.set(ControlMode.PercentOutput, speed);
-  }
-
-  public void setRightMotors(double speed){
-    this.m_motorRight1.set(ControlMode.PercentOutput, speed);
-  }
-
-
 }
