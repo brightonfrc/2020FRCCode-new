@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
-
+import frc.robot.commands.WheelOfFortuneCommand;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -48,7 +48,12 @@ public class Robot extends TimedRobot {
     shooter = new Shooter();
     wheelOfFortune = new WheelOfFortune();
 
+    WheelOfFortuneCommand wheelOfFortuneCommand = new WheelOfFortuneCommand();
+
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
+    CommandScheduler.getInstance().setDefaultCommand(wheelOfFortune, wheelOfFortuneCommand);
+    
+    wheelOfFortune.setWheelCommand(wheelOfFortuneCommand);
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -64,6 +69,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    wheelOfFortune.startRotationControl();
   }
 
   /**

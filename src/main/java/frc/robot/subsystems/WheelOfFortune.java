@@ -9,11 +9,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.RotationControl;
+import frc.robot.commands.WheelOfFortuneCommand;
 import frc.robot.helperClasses.ColorSensor;
 
 public class WheelOfFortune extends SubsystemBase {
@@ -24,40 +22,47 @@ public class WheelOfFortune extends SubsystemBase {
   public VictorSPX rotatingMotor;
   public ColorSensor colorSensor;
 
-  public static int IDLE = 0;
-  public static int ROTATION_CONTROL = 1;
-  public static int POSITION_CONTROL = 2;
-
-  public int state = IDLE;
-
-  private RotationControl m_rotationControl;
+  private WheelOfFortuneCommand wheelOfFortuneCommand;
 
   public WheelOfFortune() {
     rotatingMotor = new VictorSPX(Constants.WHEEL_OF_FORTUNE_MOTOR_ID);
     colorSensor = new ColorSensor(Constants.COLOR_SENSOR_I2C_PORT);
+  }
 
-    m_rotationControl = new RotationControl();
-
-    // so that the scheduler knows that this subsystem exists
-    CommandScheduler.getInstance().registerSubsystem();
+  public void initDefaultCommand() {
+    System.out.println("Added rotation control");
   }
 
   public void startRotationControl(){
-    state = ROTATION_CONTROL;
+    wheelOfFortuneCommand.setState(WheelOfFortuneCommand.ROTATION_CONTROL);
+
+    //System.out.println("Start rotation control call");
 
     // set the rotation control command
-    CommandScheduler.getInstance().schedule(m_rotationControl);
+    //CommandScheduler.getInstance().schedule(m_rotationControl);
   }
 
   public void startPositionControl(){
-    state = POSITION_CONTROL;
+    wheelOfFortuneCommand.setState(WheelOfFortuneCommand.POSITION_CONTROL);
 
     // stop the rotation control
-    CommandScheduler.getInstance().cancel(m_rotationControl);
+    //CommandScheduler.getInstance().cancel(m_rotationControl);
   }
 
   @Override
   public void periodic() {
+    //System.out.println(getCurrentCommand());
     // This method will be called once per scheduler run
+  }
+
+
+
+  // getters and setters
+  public void setWheelCommand(WheelOfFortuneCommand command){
+    wheelOfFortuneCommand = command;
+  }
+
+  public WheelOfFortuneCommand getWheelCommand(){
+    return wheelOfFortuneCommand;
   }
 }
