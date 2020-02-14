@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ComputerVision;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
+import frc.robot.commands.DriveForTime;
 import frc.robot.commands.WheelOfFortuneCommand;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.WheelOfFortune;
@@ -120,6 +121,10 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
+
+
+    // Change this when testing!!!! 
+    CommandScheduler.getInstance().schedule(new DriveForTime(1.0, 1000));
   }
 
   /**
@@ -143,6 +148,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    
+    C
   }
 
   /**
