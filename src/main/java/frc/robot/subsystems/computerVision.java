@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class computerVision extends SubsystemBase {
+public class ComputerVision extends SubsystemBase {
   /**
    * Creates a new computerVision.
    */
@@ -27,9 +27,18 @@ public class computerVision extends SubsystemBase {
   // 11 in from the ground
   final static double[] loadingBayTargetDims = {17.78, 27.94};
   
-  public computerVision() {
+  public ComputerVision() {
     // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  }
+
+  // TODO: change this
+  public double getAngleToTarget(){
+    return 0d;
+  }
+
+  public double getDistanceToTarget(){
+    return 7d;
   }
 
   @Override

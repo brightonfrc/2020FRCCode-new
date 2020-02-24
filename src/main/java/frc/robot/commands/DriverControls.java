@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.customDatatypes.DriveSignal;
 
 public class DriverControls extends CommandBase {
   /**
@@ -34,6 +35,8 @@ public class DriverControls extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(final boolean interrupted) {
+    // stop the drivetrain
+    Robot.driveTrain.tankDrive(DriveSignal.NEUTRAL);
   }
 
   // Returns true when the command should end.

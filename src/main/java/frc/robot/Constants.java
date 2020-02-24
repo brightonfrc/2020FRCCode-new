@@ -39,11 +39,17 @@ public class Constants {
   public static final double MANUAL_QUICK_TURN_THROTTLE_THRESHOLD = 0.2;
 
   // Drivetrain pid values
-  public static final double DRIVETRAIN_P = 1;
-  public static final double DRIVETRAIN_I = 1;
-  public static final double DRIVETRAIN_D = 1;
+  public static final double DRIVETRAIN_THRUST_P = 1;
+  public static final double DRIVETRAIN_THRUST_I = 1;
+  public static final double DRIVETRAIN_THRUST_D = 1;
 
-  public static final double DRIVETRAIN_POSITION_TOLERANCE = 1;
+  public static final double DRIVETRAIN_ROTATION_P = 1;
+  public static final double DRIVETRAIN_ROTATION_I = 1;
+  public static final double DRIVETRAIN_ROTATION_D = 1;
+
+  public static final double DRIVETRAIN_AUTONOMOUS_SPEED = 1;
+
+  public static final double MINIMAL_DISTANCE_FOR_SHOOTING_RANGE_CHECK = 5;
 
 
   // Wheel of fortune code

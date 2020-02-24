@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ComputerVision;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
 import frc.robot.commands.WheelOfFortuneCommand;
@@ -33,6 +34,7 @@ public class Robot extends TimedRobot {
   public static DriveTrain driveTrain;
   public static Shooter shooter;
   public static WheelOfFortune wheelOfFortune;
+  public static ComputerVision computerVision;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -47,6 +49,8 @@ public class Robot extends TimedRobot {
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     wheelOfFortune = new WheelOfFortune();
+    computerVision = new ComputerVision();
+
 
     WheelOfFortuneCommand wheelOfFortuneCommand = new WheelOfFortuneCommand();
 

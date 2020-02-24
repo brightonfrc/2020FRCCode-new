@@ -60,8 +60,6 @@ public class DriveTrain extends SubsystemBase {
     this.m_motorRight1.set(ControlMode.PercentOutput, speed);
   }
 
-  // TODO: check if user input is less than epsilon in OI
-
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -90,7 +88,6 @@ public class DriveTrain extends SubsystemBase {
     tankDrive(leftSpeed, rightSpeed);
   }
 
-  // TODO: do not forget to change the OI input
   public void curvatureDrive(double throttle, double curvatureInput,
       boolean isManual) {
     
