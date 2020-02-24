@@ -27,6 +27,22 @@ public class Constants {
 
   public static final double INVERSE_KINEMATICS_TURN_EPSILON = 0.05;
 
+  // constants for automatic shooting w/CV:
+  // TODO: replace "69" with actual values! 
+  public static final double PIXEL_DEGREE_HORIZONTAL_CONVERT = 0.09375;
+  public static final double PIXEL_DEGREE_VERTICAL_CONVERT = 0.06996; //Both converts in degrees per pixel
+  public static final double SHOOTER_V = 69; // FIND THIS OUT, wont be needed in calculations, just needs to stay constant (velocity)
+  public static final double DELTA_H = FieldMap.TARGET_HEIGHT - 69; // FIND OUT THE HEIGHT OF CAMERA FROM THE FLOOR, this is used to calculate d
+  public static final double ANGLE_I = Math.atan(DELTA_H/69); // Replace this "69" with any realistic distance, from which the camera's image's centre is at the centre of target
+  public static final double DISTANCE_D = 69; // FIND THIS OUT (THIS IS CRUCIAL) it is the distance from centre of robot to target centre where shooter scores
+  public static final double MAXIMUM_DRIVE_VELOCITY = 69; // --TEST THIS ON MONDAY-- //
+  public static final double TIME_CUTOFF_PROPORTION = 69; // --TEST THIS ON MONDAY-- // or use value 0.05 as a guesstimate
+  public static final long TIME_DELAY_BEFORE_RESCAN = 69; // --TEST THIS ON MONDAY-- // or use value 100 as a guesstimate (this time is in milliseconds)
+  // accounting for component displacement: all in metres (NOTE: c = camera; e = centre of robot; t = tip of shooter)
+  public static final double LENGTH_E_C = 69; 
+  // Note: define more displacement constants if needed above
+
+  
   // robot dimensions
 
   // TODO: set actual values!
@@ -39,12 +55,14 @@ public class Constants {
   public static final double DRIVETRAIN_D = 1;
 
   public static final double DRIVETRAIN_POSITION_TOLERANCE = 1;
+  public static final int X_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 3 as a guesstimate
+  public static final int Y_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 1 as a guesstimate
 
 
 
 
   // Colours
-  public static double[] BLUE_VALUES = {0.143, 0.427, 0.429} ;
+  public static double[] BLUE_VALUES = {0.143, 0.427, 0.429};
   public static double[] GREEN_VALUES = {0.197, 0.561, 0.240};
   public static double[] RED_VALUES = {0.561, 0.232, 0.114};
   public static double[] YELLOW_VALUES = {0.361, 0.524, 0.113};
