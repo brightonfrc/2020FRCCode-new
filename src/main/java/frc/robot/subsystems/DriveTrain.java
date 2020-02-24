@@ -92,7 +92,17 @@ public class DriveTrain extends SubsystemBase {
 
   // TODO: do not forget to change the OI input
   public void curvatureDrive(double throttle, double curvatureInput,
-      double inverseKinematicsTurnThreshold) {
+      boolean isManual) {
+    
+    double inverseKinematicsTurnThreshold = isManual? Constants.MANUAL_TURN_THRESHOLD: 1d;
+    double quickTurnThrustThreshold = isManual? Constants.MANUAL_QUICK_TURN_THROTTLE_THRESHOLD: 1d;
+
+    // if quick turn
+    if(Math.abs(throttle) < quickTurnThrustThreshold){
+      // set throttle to 0
+      throttle = 0d;
+    }
+
     // get the required amount of motor powers to turn
     final DriveSignal signal = DriveSignal.inverseKinematics(new Twist2d(throttle, 0.0, curvatureInput),
         inverseKinematicsTurnThreshold);
@@ -105,7 +115,7 @@ public class DriveTrain extends SubsystemBase {
 
   // if no threshold
   public void curvatureDrive(final double throttle, final double curvatureInput) {
-    curvatureDrive(throttle, curvatureInput, 0.0);
+    curvatureDrive(throttle, curvatureInput, false);
   }
 
   // public void quickTurn(final double rotationSpeed) {

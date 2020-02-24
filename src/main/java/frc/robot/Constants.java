@@ -28,15 +28,15 @@ public class Constants {
 
   public static final I2C.Port COLOR_SENSOR_I2C_PORT = I2C.Port.kOnboard;
 
-  // robot constants
-
-  public static final double INVERSE_KINEMATICS_TURN_EPSILON = 0.05;
-
   // robot dimensions
 
   // TODO: set actual values!
   public static final double DRIVE_WHEEL_TRACK_WIDTH = 70;
   public static final double TRACK_SCRUB_FACTOR = 0.5;
+
+  // Drvietrain
+  public static final double MANUAL_TURN_THRESHOLD = 0.2;
+  public static final double MANUAL_QUICK_TURN_THROTTLE_THRESHOLD = 0.2;
 
   // Drivetrain pid values
   public static final double DRIVETRAIN_P = 1;
