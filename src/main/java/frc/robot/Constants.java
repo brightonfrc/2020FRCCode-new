@@ -70,6 +70,9 @@ public class Constants {
   public static final double DRIVETRAIN_ROTATION_I = 1;
   public static final double DRIVETRAIN_ROTATION_D = 1;
 
+  public static final double DRIVETRAIN_DISTANCE_TOLERANCE = 0.05;
+  public static final double DRIVETRAIN_ANGLE_TOLERANCE = 5;
+
   public static final double DRIVETRAIN_AUTONOMOUS_SPEED = 1;
 
 
