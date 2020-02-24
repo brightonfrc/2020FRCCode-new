@@ -11,10 +11,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.ComputerVision;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
-
+import frc.robot.commands.WheelOfFortuneCommand;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 
@@ -31,6 +33,8 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static DriveTrain driveTrain;
   public static Shooter shooter;
+  public static WheelOfFortune wheelOfFortune;
+  public static ComputerVision computerVision;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -44,8 +48,16 @@ public class Robot extends TimedRobot {
     oi = new OI();
     driveTrain = new DriveTrain();
     shooter = new Shooter();
+    wheelOfFortune = new WheelOfFortune();
+    computerVision = new ComputerVision();
+
+
+    WheelOfFortuneCommand wheelOfFortuneCommand = new WheelOfFortuneCommand();
 
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
+    CommandScheduler.getInstance().setDefaultCommand(wheelOfFortune, wheelOfFortuneCommand);
+    
+    wheelOfFortune.setWheelCommand(wheelOfFortuneCommand);
 
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
@@ -61,6 +73,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    wheelOfFortune.startRotationControl();
   }
 
   /**
