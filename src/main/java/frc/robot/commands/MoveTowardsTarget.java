@@ -67,7 +67,6 @@ public class MoveTowardsTarget extends PIDCommand {
     if(Robot.computerVision.getDistanceToTarget() < Constants.MINIMAL_DISTANCE_FOR_SHOOTING_RANGE_CHECK){
       // TODO: check if the shooter can shoot now
       if(true){
-        endOfCommand();
         return true;
       }
     }

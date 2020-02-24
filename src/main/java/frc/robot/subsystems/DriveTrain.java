@@ -115,8 +115,4 @@ public class DriveTrain extends SubsystemBase {
   public void curvatureDrive(final double throttle, final double curvatureInput) {
     curvatureDrive(throttle, curvatureInput, false);
   }
-
-  // public void quickTurn(final double rotationSpeed) {
-  //   tankDrive(rotationSpeed, -rotationSpeed);
-  // }
 }
