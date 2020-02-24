@@ -43,9 +43,21 @@ public class MoveTowardsTarget extends PIDCommand {
     addRequirements(Robot.driveTrain);
   }
 
-  // Called once after isFinished returns true
-  // end is overriden by PIDCommand, so this is a new one
-  protected void endOfCommand() {
+  @Override
+  public void initialize() {
+    super.initialize();
+
+    // reset the contoller
+    getController().reset();
+    
+    // set continious and 360 degrees
+    getController().enableContinuousInput(-180, 180);
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    super.end(interrupted);
+
     Robot.driveTrain.tankDrive(DriveSignal.NEUTRAL);
   }
 

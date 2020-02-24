@@ -63,7 +63,8 @@ public class DriveTrain extends SubsystemBase {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  // drives with set speeds for each side of motors
+  // drives with set speeds for each side of motor
+  // Input speeds from 0 to 1 (1 is full speed)
   public void tankDrive(final double leftSpeed, final double rightSpeed) {
     setLeftMotors(-leftSpeed);
     setRightMotors(rightSpeed);
