@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.commands.DriverControls;
 import frc.robot.customDatatypes.DriveSignal;
+import frc.robot.customDatatypes.Twist2d;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -59,8 +60,6 @@ public class DriveTrain extends SubsystemBase {
     this.m_motorRight1.set(ControlMode.PercentOutput, speed);
   }
 
-  // TODO: check if user input is less than epsilon in OI
-
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -90,25 +89,30 @@ public class DriveTrain extends SubsystemBase {
     tankDrive(leftSpeed, rightSpeed);
   }
 
-  // // TODO: do not forget to change the OI input
-  // public void curvatureDrive(final double throttle, final double curvatureInput,
-  //     final double inverseKinematicsTurnThreshold) {
-  //   // get the required amount of motor powers to turn
-  //   final DriveSignal signal = DriveSignal.inverseKinematics(new Twist2d(throttle, 0.0, curvatureInput),
-  //       inverseKinematicsTurnThreshold);
-  //   // make sure that no motors go above 100% speed
-  //   final double scalingFactor = Math.max(1.0,
-  //       Math.max(Math.abs(signal.getLeftPercentage()), Math.abs(signal.getRightPercentage())));
-  //   // apply the scale factor
-  //   tankDrive(signal.getLeftPercentage() / scalingFactor, signal.getRightPercentage() / scalingFactor);
-  // }
+  public void curvatureDrive(double throttle, double curvatureInput,
+      boolean isManual) {
+    
+    double inverseKinematicsTurnThreshold = isManual? Constants.MANUAL_TURN_THRESHOLD: 1d;
+    double quickTurnThrustThreshold = isManual? Constants.MANUAL_QUICK_TURN_THROTTLE_THRESHOLD: 1d;
 
-  // // if no threshold
-  // public void curvatureDrive(final double throttle, final double curvatureInput) {
-  //   curvatureDrive(throttle, curvatureInput, 0.0);
-  // }
+    // if quick turn
+    if(Math.abs(throttle) < quickTurnThrustThreshold){
+      // set throttle to 0
+      throttle = 0d;
+    }
 
-  // public void quickTurn(final double rotationSpeed) {
-  //   tankDrive(rotationSpeed, -rotationSpeed);
-  // }
+    // get the required amount of motor powers to turn
+    final DriveSignal signal = DriveSignal.inverseKinematics(new Twist2d(throttle, 0.0, curvatureInput),
+        inverseKinematicsTurnThreshold);
+    // make sure that no motors go above 100% speed
+    final double scalingFactor = Math.max(1.0,
+        Math.max(Math.abs(signal.getLeftPercentage()), Math.abs(signal.getRightPercentage())));
+    // apply the scale factor
+    tankDrive(signal.getLeftPercentage() / scalingFactor, signal.getRightPercentage() / scalingFactor);
+  }
+
+  // if no threshold
+  public void curvatureDrive(final double throttle, final double curvatureInput) {
+    curvatureDrive(throttle, curvatureInput, false);
+  }
 }

@@ -23,7 +23,7 @@ public class ColorSensor{
     private ColorSensorV3 m_colorSensor;
     private ColorMatch m_colorMatcher;
 
-    ColorSensor(Port i2cPort){
+    public ColorSensor(Port i2cPort){
         m_colorSensor = new ColorSensorV3(i2cPort);
         m_colorMatcher = new ColorMatch();
 
@@ -34,7 +34,7 @@ public class ColorSensor{
         m_colorMatcher.addColorMatch(Constants.YELLOW_TARGET);
     }
 
-    public ColorMatchResult getColour(){
+    public ColorMatchResult getColourLabel(){
         Color detectedColor = m_colorSensor.getColor();
 
         return m_colorMatcher.matchClosestColor(detectedColor);
