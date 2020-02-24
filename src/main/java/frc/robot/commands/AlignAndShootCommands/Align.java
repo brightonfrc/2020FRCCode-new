@@ -36,9 +36,10 @@ public class Align extends CommandBase {
   public void execute() {
     int x_centre = 69;
     int y_centre = 420; // TODO: GET THESE FROM NETWORK TABLE (X AND Y COORDS OF CENTRE (IMAGE DIMENSIONS 640x480)
-    while ((Math.abs(x_centre - 319.5) > Constants.X_TOLERANCE) &(Math.abs(y_centre - 239.5) > Constants.Y_TOLERANCE)) { // INSTEAD OF USING PID, IT ALIGNS MUTLIPLE TIMES UNTIL A THRESHOLD IS REACHED (EACH TIME THE YAW ANGLE AND DISTANCE DIFFERENCE IS SMALLER).
+    
     double pitch_angle = (y_centre - 239.5)*Constants.PIXEL_DEGREE_VERTICAL_CONVERT;
     double yaw_angle = (x_centre - 319.5)*Constants.PIXEL_DEGREE_HORIZONTAL_CONVERT;
+    
     double distance_d = Math.sin(Math.toRadians(90 - Constants.ANGLE_I)) * (Constants.DELTA_H / Math.sin(Math.toRadians(Constants.ANGLE_I + pitch_angle))); //This is the distance from the CAMERA to the centre of target
     double distance_d_adjusted = Math.sqrt((Math.pow(distance_d, 2)) + (Math.pow(Constants.LENGTH_E_C, 2)) - ((2*distance_d*Constants.LENGTH_E_C)*Math.cos(Math.toRadians(180-yaw_angle)))); // This is the distance from the CENTRE OF ROBOT (E) to centre of target
     double yaw_angle_adjusted = distance_d * (distance_d_adjusted / (180 - yaw_angle));
@@ -100,31 +101,27 @@ public class Align extends CommandBase {
         System.out.println("No need to rotate or move");
         end(false);
       }
-    }
+
     // Finding time (seconds) for which to rotate (assuming instant acceleration)
     double rotation_time = (Math.toRadians(yaw_angle_adjusted) * (Constants.DRIVE_WHEEL_TRACK_WIDTH / 2)) / (Math.abs((proportion_of_total_velocity_right * Constants.MAXIMUM_DRIVE_VELOCITY) - (proportion_of_total_velocity_left * Constants.MAXIMUM_DRIVE_VELOCITY)));
     
     //Actally rotating using tank drive.
     driveTrain.tankDrive(proportion_of_total_velocity_left, proportion_of_total_velocity_right);
     // Waiting for the robot to turn
-    try {
-      long rotation_time_milliseconds = (long) Math.round(rotation_time * 1000); // multiplied by a thousand to convert time to milliseconds
-      long rotation_cutoff_time_milliseconds = (long) (rotation_time_milliseconds *  Constants.TIME_CUTOFF_PROPORTION);
-      Thread.sleep(rotation_time_milliseconds - rotation_cutoff_time_milliseconds); // The last constant is just to increase the speed of the entire AnS process by reducing overshoot for each 
-    } catch(InterruptedException ex) {
-      Thread.currentThread().interrupt();
-    }
-    //Stopping robot (the simple way, no need for PID as command will repeat until threshold yaw angle and d is achieved):
-    driveTrain.tankDrive(0, 0);
-    try {
-        Thread.sleep(Constants.TIME_DELAY_BEFORE_RESCAN);
-      } catch(InterruptedException ex) {
-      Thread.currentThread().interrupt();
-    }
-
-    // Resetting values to updated ones:
-    x_centre = 69; // TODO: GET THESE FROM NETWORK TABLE (X AND Y COORDS OF CENTRE (IMAGE DIMENSIONS 640x480)
-    y_centre = 420;
+    // try {
+    //   long rotation_time_milliseconds = (long) Math.round(rotation_time * 1000); // multiplied by a thousand to convert time to milliseconds
+    //   long rotation_cutoff_time_milliseconds = (long) (rotation_time_milliseconds *  Constants.TIME_CUTOFF_PROPORTION);
+    //   Thread.sleep(rotation_time_milliseconds - rotation_cutoff_time_milliseconds); // The last constant is just to increase the speed of the entire AnS process by reducing overshoot for each 
+    // } catch(InterruptedException ex) {
+    //   Thread.currentThread().interrupt();
+    // }
+    // //Stopping robot (the simple way, no need for PID as command will repeat until threshold yaw angle and d is achieved):
+    // driveTrain.tankDrive(0, 0);
+    // try {
+    //     Thread.sleep(Constants.TIME_DELAY_BEFORE_RESCAN);
+    //   } catch(InterruptedException ex) {
+    //   Thread.currentThread().interrupt();
+    // }
     }
   }
 
@@ -141,6 +138,12 @@ public class Align extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    int x_centre = 69;
+    int y_centre = 420; // TODO: GET THESE FROM NETWORK TABLE (X AND Y COORDS OF CENTRE (IMAGE DIMENSIONS 640x480)
+
+    if((Math.abs(x_centre - 319.5) < Constants.X_TOLERANCE) && (Math.abs(y_centre - 239.5) < Constants.Y_TOLERANCE)){
+      return true;
+    }
     return false;
   }
 }

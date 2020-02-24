@@ -29,6 +29,8 @@ public class Constants {
 
   // constants for automatic shooting w/CV:
   // TODO: replace "69" with actual values! 
+  public static final int CAMERA_RESOLUTION_X = 640;
+  public static final int CAMERA_RESOLUTION_Y = 480;
   public static final double PIXEL_DEGREE_HORIZONTAL_CONVERT = 0.09375;
   public static final double PIXEL_DEGREE_VERTICAL_CONVERT = 0.06996; //Both converts in degrees per pixel
   public static final double SHOOTER_V = 69; // FIND THIS OUT, wont be needed in calculations, just needs to stay constant (velocity)
