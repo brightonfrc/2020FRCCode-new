@@ -40,13 +40,14 @@ public class Constants {
   public static final double ANGLE_I = Math.atan(DELTA_H/69); // Replace this "69" with any realistic distance, from which the camera's image's centre is at the centre of target
   public static final double DISTANCE_D = 69; // FIND THIS OUT (THIS IS CRUCIAL) it is the distance from centre of robot to target centre where shooter scores
   public static final double MAXIMUM_DRIVE_VELOCITY = 69; // --TEST THIS ON MONDAY-- //
-  public static final double TIME_CUTOFF_PROPORTION = 69; // --TEST THIS ON MONDAY-- // or use value 0.05 as a guesstimate
-  public static final long TIME_DELAY_BEFORE_RESCAN = 69; // --TEST THIS ON MONDAY-- // or use value 100 as a guesstimate (this time is in milliseconds)
+  // public static final double TIME_CUTOFF_PROPORTION = 69; // --TEST THIS ON MONDAY-- // or use value 0.05 as a guesstimate
+  // public static final long TIME_DELAY_BEFORE_RESCAN = 69; // --TEST THIS ON MONDAY-- // or use value 100 as a guesstimate (this time is in milliseconds)
+
   // accounting for component displacement: all in metres (NOTE: c = camera; e = centre of robot; t = tip of shooter)
   public static final double LENGTH_E_C = 69; 
   // Note: define more displacement constants if needed above
 
-  public static final int X_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 3 as a guesstimate
+  public static final int X_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 3 as a guesstimate (THESE VALUES ARE IN PIXELS)
   public static final int Y_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 1 as a guesstimate
 
   public static final I2C.Port COLOR_SENSOR_I2C_PORT = I2C.Port.kOnboard;
