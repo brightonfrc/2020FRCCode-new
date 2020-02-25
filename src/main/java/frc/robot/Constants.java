@@ -35,9 +35,10 @@ public class Constants {
   public static final int CAMERA_RESOLUTION_Y = 480;
   public static final double PIXEL_DEGREE_HORIZONTAL_CONVERT = 0.09375;
   public static final double PIXEL_DEGREE_VERTICAL_CONVERT = 0.06996; //Both converts in degrees per pixel
-  public static final double SHOOTER_V = 69; // FIND THIS OUT, wont be needed in calculations, just needs to stay constant (velocity)
+  // public static final double SHOOTER_V = 69; // FIND THIS OUT, wont be needed in calculations, just needs to stay constant (velocity)
   public static final double DELTA_H = FieldMap.TARGET_HEIGHT - 69; // FIND OUT THE HEIGHT OF CAMERA FROM THE FLOOR, this is used to calculate d
-  public static final double ANGLE_I = Math.atan(DELTA_H/69); // Replace this "69" with any realistic distance, from which the camera's image's centre is at the centre of target
+  public static final double DISTANCE_I = 69; // Replace this "69" with any realistic distance, from which the camera's image's centre is at the centre of target
+  public static final double ANGLE_I = Math.atan(DELTA_H/DISTANCE_I); 
   public static final double DISTANCE_D = 69; // FIND THIS OUT (THIS IS CRUCIAL) it is the distance from centre of robot to target centre where shooter scores
   public static final double MAXIMUM_DRIVE_VELOCITY = 69; // --TEST THIS ON MONDAY-- //
   // public static final double TIME_CUTOFF_PROPORTION = 69; // --TEST THIS ON MONDAY-- // or use value 0.05 as a guesstimate
