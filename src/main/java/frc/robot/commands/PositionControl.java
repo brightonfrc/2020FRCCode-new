@@ -20,9 +20,15 @@ public class PositionControl extends CommandBase {
   /**
    * Creates a new PositionControl.
    */
+
+  private long timeSinceLastPositioned;
+  private boolean isPositioned = false;
+
   public PositionControl() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.wheelOfFortune);
+
+    timeSinceLastPositioned = System.currentTimeMillis();
   }
 
   // Called when the command is initially scheduled.
@@ -33,22 +39,45 @@ public class PositionControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    System.out.println("Position control color index: " + getCurrentIndex());
+    int currentIndex = getCurrentIndex();
+
+    System.out.println("Position control color index: " + currentIndex);
+
+    // check where it is closer
+    int sensorIndex = getFRCSensorColorIndex(currentIndex);
+    int closestSteps = sensorIndex - 2;
+
+    isPositioned = false;
+
+    if(closestSteps < 0){
+      // rotate in one direction
+      Robot.wheelOfFortune.rotatingMotor.set(ControlMode.PercentOutput, Constants.WHEEL_OF_FORTUNE_ROTATION_SPEED);
+    }else if(closestSteps > 0){
+      // rotate in another direction
+      Robot.wheelOfFortune.rotatingMotor.set(ControlMode.PercentOutput, -Constants.WHEEL_OF_FORTUNE_ROTATION_SPEED);
+    }else{
+      // stop
+      Robot.wheelOfFortune.rotatingMotor.set(ControlMode.PercentOutput, 0);
+
+      isPositioned = true;
+    }
+
+    if(!isPositioned){
+      timeSinceLastPositioned = System.currentTimeMillis();
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // stop
+    Robot.wheelOfFortune.rotatingMotor.set(ControlMode.PercentOutput, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
-  }
-
-  private void debugColorPredictions(){
-    System.out.println();
+    return timeSinceLastPositioned + Constants.TIME_TO_WAIT_FOR_WHEEL_TO_SETTLE <= System.currentTimeMillis();
   }
 
   private int getFRCSensorColorIndex(int currentIndex){
