@@ -24,7 +24,7 @@ public class Constants {
   public static final int MOTOR_RIGHT_1_ID = 3;
   public static final int MOTOR_RIGHT_2_ID = 4;
 
-  public static final int WHEEL_OF_FORTUNE_MOTOR_ID = 5;
+  public static final int WHEEL_OF_FORTUNE_MOTOR_ID = 7;
 
   public static final I2C.Port COLOR_SENSOR_I2C_PORT = I2C.Port.kOnboard;
 
@@ -47,7 +47,7 @@ public class Constants {
 
 
   // Wheel of fortune code
-  public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.5; 
+  public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.1; 
 
   // Color control rotations
   public static final int MIN_COLOR_CONTROL_ROTATIONS = 3;
