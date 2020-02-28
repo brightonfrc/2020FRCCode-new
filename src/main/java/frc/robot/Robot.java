@@ -42,10 +42,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    oi = new OI();
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     wheelOfFortune = new WheelOfFortune();
+
+    oi = new OI();
 
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
     
