@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ManualFortuneWheelControl;
 import frc.robot.commands.PositionControl;
 import frc.robot.commands.RotationControl;
 
@@ -50,15 +51,16 @@ public class OI {
 
   public double xAxis, yAxis, zAxis, twistAxis, throttleAxis;
 
-  static JoystickButton button1, button2;
+  static JoystickButton rotationControlButton, positionControlButton, manualWHeelControlButton;
 
   public OI() {
     stick = new Joystick(0);
-    button1 = new JoystickButton(stick, 1);
-    button2 = new JoystickButton(stick, 2);
+    rotationControlButton = new JoystickButton(stick, 1);
+    positionControlButton = new JoystickButton(stick, 2);
 
-    button1.whenActive(new RotationControl());
-    button2.whenActive(new PositionControl());
+    rotationControlButton.whenActive(new RotationControl());
+    positionControlButton.whenActive(new PositionControl());
+    manualWHeelControlButton.whenActive(new ManualFortuneWheelControl());
   }
 
   public void update(){

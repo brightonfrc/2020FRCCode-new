@@ -48,6 +48,7 @@ public class Constants {
 
   // Wheel of fortune code
   public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.5; 
+  public static final double MANUAL_CONTROL_WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.5; 
 
   public static final long TIME_TO_WAIT_FOR_WHEEL_TO_SETTLE = 500;
 
