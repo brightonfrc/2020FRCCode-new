@@ -8,13 +8,24 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Shooter extends SubsystemBase {
 
+  private final VictorSPX m_motorLeft;
+  private final VictorSPX m_motorRight;
+
   public Shooter() {
+    m_motorLeft = new VictorSPX(Constants.SHOOTER_LEFT_MOTOR_ID);
+    m_motorRight = new VictorSPX(Constants.SHOOTER_RIGHT_MOTOR_ID);
+
+    m_motorLeft.follow(m_motorRight);
+
+    // pre-spin the motors
+    m_motorRight.set(ControlMode.PercentOutput, Constants.SHOOTER_MOTORS_SPEED);
   }
 
   @Override

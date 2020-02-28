@@ -19,11 +19,15 @@ import edu.wpi.first.wpilibj.I2C;
  * floating around.
  */
 public class Constants {
-  public static final int MOTOR_LEFT_1_ID = 1;
-  public static final int MOTOR_LEFT_2_ID = 2;
-  public static final int MOTOR_RIGHT_1_ID = 3;
-  public static final int MOTOR_RIGHT_2_ID = 4;
-  public static final int WHEEL_OF_FORTUNE_MOTOR_ID = 5;
+  public static final int MOTOR_LEFT_1_ID = 4;
+  public static final int MOTOR_LEFT_2_ID = 1;
+  public static final int MOTOR_RIGHT_1_ID = 2;
+  public static final int MOTOR_RIGHT_2_ID = 3;
+
+  public static final int WHEEL_OF_FORTUNE_MOTOR_ID = -1;
+
+  public static final int SHOOTER_LEFT_MOTOR_ID = 5;
+  public static final int SHOOTER_RIGHT_MOTOR_ID = 6;
 
   // robot constants
 
@@ -43,8 +47,10 @@ public class Constants {
   public static final double TIME_CUTOFF_PROPORTION = 69; // --TEST THIS ON MONDAY-- // or use value 0.05 as a guesstimate
   public static final long TIME_DELAY_BEFORE_RESCAN = 69; // --TEST THIS ON MONDAY-- // or use value 100 as a guesstimate (this time is in milliseconds)
   // accounting for component displacement: all in metres (NOTE: c = camera; e = centre of robot; t = tip of shooter)
-  public static final double LENGTH_E_C = 69; 
+  public static final double LENGTH_E_C = 0.4; 
   // Note: define more displacement constants if needed above
+
+  public static final double SHOOTER_MOTORS_SPEED = 0.1;
 
   public static final int X_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 3 as a guesstimate
   public static final int Y_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 1 as a guesstimate
