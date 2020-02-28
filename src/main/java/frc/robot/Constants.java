@@ -64,4 +64,6 @@ public class Constants {
   public static Color GREEN_TARGET = ColorMatch.makeColor(GREEN_VALUES[0], GREEN_VALUES[1], GREEN_VALUES[2]);
   public static Color RED_TARGET = ColorMatch.makeColor(RED_VALUES[0], RED_VALUES[1], RED_VALUES[2]);
   public static Color YELLOW_TARGET = ColorMatch.makeColor(YELLOW_VALUES[0], YELLOW_VALUES[1], YELLOW_VALUES[2]);
+
+  public static final Color[] CLOCKWISE_COLORS_ON_THE_WHEEL = {BLUE_TARGET, GREEN_TARGET, RED_TARGET, YELLOW_TARGET}; 
 }

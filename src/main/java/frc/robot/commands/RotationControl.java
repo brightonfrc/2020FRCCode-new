@@ -41,9 +41,10 @@ public class RotationControl extends CommandBase {
     // if the color chaged and it is the one needed
     ColorMatchResult currentReading = Robot.wheelOfFortune.colorSensor.getColourLabel();
 
-    ColorSensor.debugColorMatch(currentReading);
+    Robot.wheelOfFortune.colorSensor.debugColorMatch(currentReading);
 
-    if(currentReading.color != previousColorReading.color && currentReading == initialColorReading){
+    if(currentReading.color != previousColorReading.color && currentReading.color == initialColorReading.color){
+      System.out.println("Next color");
       // increase the counter by 1
       numOfTimesInitialColorWasSeen++;
     }
