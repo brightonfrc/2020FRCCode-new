@@ -41,26 +41,34 @@ public class ColorSensor{
     }
 
     public static void debugColorMatch(ColorMatchResult result){
-        System.out.println("Red: " + result.color.red);
-        System.out.println("Green: " + result.color.green);
-        System.out.println("Blue: " + result.color.blue);
+        // System.out.println("Red: " + result.color.red);
+        // System.out.println("Green: " + result.color.green);
+        // System.out.println("Blue: " + result.color.blue);
 
-        System.out.println("Confidence: " + result.confidence);
+        // System.out.println("Confidence: " + result.confidence);
 
         String colorString = "";
 
         if (result.color == Constants.BLUE_TARGET) {
-            colorString = "Blue";
-          } else if (result.color == Constants.RED_TARGET) {
-            colorString = "Red";
-          } else if (result.color == Constants.GREEN_TARGET) {
-            colorString = "Green";
-          } else if (result.color == Constants.YELLOW_TARGET) {
-            colorString = "Yellow";
-          } else {
-            colorString = "Unknown";
-          }
+          colorString = "Blue";
+        } else if (result.color == Constants.RED_TARGET) {
+          colorString = "Red";
+        } else if (result.color == Constants.GREEN_TARGET) {
+          colorString = "Green";
+        } else if (result.color == Constants.YELLOW_TARGET) {
+          colorString = "Yellow";
+        } else {
+          colorString = "Unknown";
+        }
 
           System.out.println("Prediction: " + colorString);
+    }
+
+    public static boolean isAColour(ColorMatchResult result){
+      if (result.color == Constants.BLUE_TARGET || result.color == Constants.RED_TARGET || result.color == Constants.GREEN_TARGET || result.color == Constants.YELLOW_TARGET) {
+        return true;
+      } else {
+        return false;
+      }
     }
 }

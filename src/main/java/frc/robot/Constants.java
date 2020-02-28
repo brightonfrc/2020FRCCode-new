@@ -19,10 +19,13 @@ import edu.wpi.first.wpilibj.I2C;
  * floating around.
  */
 public class Constants {
-  public static final int MOTOR_LEFT_1_ID = 1;
-  public static final int MOTOR_LEFT_2_ID = 2;
-  public static final int MOTOR_RIGHT_1_ID = 3;
-  public static final int MOTOR_RIGHT_2_ID = 4;
+  public static final int MOTOR_LEFT_1_ID = 4;
+  public static final int MOTOR_LEFT_2_ID = 1;
+  public static final int MOTOR_RIGHT_1_ID = 2;
+  public static final int MOTOR_RIGHT_2_ID = 3;
+  public static final int SHOOTER_LEFT = 5;
+  public static final int SHOOTER_RIGHT = 6;
+
 
   public static final int WHEEL_OF_FORTUNE_MOTOR_ID = 7;
 
@@ -47,12 +50,12 @@ public class Constants {
 
 
   // Wheel of fortune code
-  public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.1; 
+  public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.2; 
 
   // Color control rotations
-  public static final int MIN_COLOR_CONTROL_ROTATIONS = 3;
+  public static final int MIN_COLOR_CONTROL_ROTATIONS = 3;// 3
   public static final int MAX_COLOR_CONTROL_ROTATIONS = 5;
-  public static final int NUMBER_OF_REPETITIONS_OF_COLOR_PER_TURN = 2;
+  public static final int NUMBER_OF_REPETITIONS_OF_COLOR_PER_TURN = 2; //2
 
   // Colors
   public static double[] BLUE_VALUES = {0.143, 0.427, 0.429} ;
