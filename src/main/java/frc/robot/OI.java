@@ -57,6 +57,7 @@ public class OI {
     stick = new Joystick(0);
     rotationControlButton = new JoystickButton(stick, 1);
     positionControlButton = new JoystickButton(stick, 2);
+    manualWHeelControlButton = new JoystickButton(stick, 3);
 
     rotationControlButton.whenActive(new RotationControl());
     positionControlButton.whenActive(new PositionControl());
