@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.customDatatypes.DriveSignal;
 
@@ -29,7 +30,21 @@ public class DriverControls extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.driveTrain.curvatureDrive(0.2 * Robot.oi.throttleAxis, 0.2 * Robot.oi.twistAxis);
+    double turn = Robot.oi.twistAxis;
+
+    // reverse when going backwards
+    if(Robot.oi.yAxis > 0){
+      turn = -turn;
+    }
+
+    double speedMultiplier = Constants.MANUAL_DRIVE_MULTIPLIER;
+
+    if(Robot.oi.stick.getRawButton(11)){
+      speedMultiplier = Constants.SLOW_MANUAL_DRIVE_MULTIPLIER;
+    }
+
+
+    Robot.driveTrain.curvatureDrive(speedMultiplier * Robot.oi.yAxis, speedMultiplier * turn);
   }
 
   // Called once the command ends or is interrupted.
