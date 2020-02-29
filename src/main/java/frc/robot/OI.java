@@ -10,7 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ManualFortuneWheelControl;
-import frc.robot.commands.PositionControl;
 import frc.robot.commands.RotationControl;
 
 /**
@@ -57,11 +56,10 @@ public class OI {
     stick = new Joystick(0);
     rotationControlButton = new JoystickButton(stick, 1);
     positionControlButton = new JoystickButton(stick, 2);
-    manualWHeelControlButton = new JoystickButton(stick, 3);
+    manualWHeelControlButton = new JoystickButton(stick, 4);
 
     rotationControlButton.whenActive(new RotationControl());
-    positionControlButton.whenActive(new PositionControl());
-    manualWHeelControlButton.whenActive(new ManualFortuneWheelControl());
+    manualWHeelControlButton.whileHeld(new ManualFortuneWheelControl());
   }
 
   public void update(){
