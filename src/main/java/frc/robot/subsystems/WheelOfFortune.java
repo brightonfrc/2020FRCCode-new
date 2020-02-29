@@ -11,7 +11,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.WheelOfFortuneCommand;
 import frc.robot.helperClasses.ColorSensor;
 
 public class WheelOfFortune extends SubsystemBase {
@@ -22,7 +21,6 @@ public class WheelOfFortune extends SubsystemBase {
   public VictorSPX rotatingMotor;
   public ColorSensor colorSensor;
 
-  private WheelOfFortuneCommand wheelOfFortuneCommand;
 
   public WheelOfFortune() {
     rotatingMotor = new VictorSPX(Constants.WHEEL_OF_FORTUNE_MOTOR_ID);
@@ -33,34 +31,8 @@ public class WheelOfFortune extends SubsystemBase {
     System.out.println("Added rotation control");
   }
 
-  public void startRotationControl(){
-
-    //System.out.println("Start rotation control call");
-
-    // set the rotation control command
-    //CommandScheduler.getInstance().schedule(m_rotationControl);
-  }
-
-  public void startPositionControl(){
-
-    // stop the rotation control
-    //CommandScheduler.getInstance().cancel(m_rotationControl);
-  }
-
   @Override
   public void periodic() {
-    //System.out.println(getCurrentCommand());
-    // This method will be called once per scheduler run
-  }
-
-
-
-  // getters and setters
-  public void setWheelCommand(WheelOfFortuneCommand command){
-    wheelOfFortuneCommand = command;
-  }
-
-  public WheelOfFortuneCommand getWheelCommand(){
-    return wheelOfFortuneCommand;
+    
   }
 }

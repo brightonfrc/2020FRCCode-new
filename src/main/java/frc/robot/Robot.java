@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ComputerVision;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
-import frc.robot.commands.WheelOfFortuneCommand;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -45,12 +44,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    oi = new OI();
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     wheelOfFortune = new WheelOfFortune();
     computerVision = new ComputerVision();
-
+    oi = new OI();
 
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
     
@@ -68,7 +66,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
-    wheelOfFortune.startRotationControl();
   }
 
   /**

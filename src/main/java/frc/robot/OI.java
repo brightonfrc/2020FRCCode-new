@@ -8,6 +8,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ManualFortuneWheelControl;
+
+import frc.robot.commands.RotationControl;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -48,8 +52,16 @@ public class OI {
 
   public double xAxis, yAxis, zAxis, twistAxis, throttleAxis;
 
-  public OI(){
+  static JoystickButton rotationControlButton, positionControlButton, manualWHeelControlButton;
+
+  public OI() {
     stick = new Joystick(0);
+    rotationControlButton = new JoystickButton(stick, 1);
+    positionControlButton = new JoystickButton(stick, 2);
+    manualWHeelControlButton = new JoystickButton(stick, 4);
+
+    rotationControlButton.whenActive(new RotationControl());
+    manualWHeelControlButton.whileHeld(new ManualFortuneWheelControl());
   }
 
   public void update(){
