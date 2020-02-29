@@ -25,7 +25,7 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    this.m_shooterLeft.set(ControlMode.PercentOutput, 0.5);
-    this.m_shooterRight.set(ControlMode.PercentOutput, -0.5);
+    //this.m_shooterLeft.set(ControlMode.PercentOutput, 0.5);
+    //this.m_shooterRight.set(ControlMode.PercentOutput, -0.5);
   }
 }
