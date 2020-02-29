@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.I2C;
  * floating around.
  */
 public class Constants {
-  public static final int MOTOR_LEFT_1_ID = 1;
-  public static final int MOTOR_LEFT_2_ID = 2;
-  public static final int MOTOR_RIGHT_1_ID = 3;
-  public static final int MOTOR_RIGHT_2_ID = 4;
+  public static final int MOTOR_LEFT_1_ID = 4;
+  public static final int MOTOR_LEFT_2_ID = 1;
+  public static final int MOTOR_RIGHT_1_ID = 2;
+  public static final int MOTOR_RIGHT_2_ID = 3;
 
   public static final int WHEEL_OF_FORTUNE_MOTOR_ID = 5;
 
@@ -31,8 +31,8 @@ public class Constants {
   // robot dimensions
 
   // TODO: set actual values!
-  public static final double DRIVE_WHEEL_TRACK_WIDTH = 70;
-  public static final double TRACK_SCRUB_FACTOR = 0.5;
+  public static final double DRIVE_WHEEL_TRACK_WIDTH = 0.55;
+  public static final double TRACK_SCRUB_FACTOR = 0.3;
 
   // Drvietrain
   public static final double MANUAL_TURN_THRESHOLD = 0.2;

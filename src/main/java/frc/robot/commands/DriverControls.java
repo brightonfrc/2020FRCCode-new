@@ -29,7 +29,7 @@ public class DriverControls extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.driveTrain.curvatureDrive(-0.2 * Robot.oi.throttleAxis, -0.2 * Robot.oi.twistAxis, true);
+    Robot.driveTrain.curvatureDrive(0.2 * Robot.oi.throttleAxis, 0.2 * Robot.oi.twistAxis);
   }
 
   // Called once the command ends or is interrupted.

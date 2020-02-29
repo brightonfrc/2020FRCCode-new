@@ -60,5 +60,13 @@ public class OI {
     zAxis = stick.getZ();
     twistAxis = stick.getTwist();
     throttleAxis = stick.getThrottle();
+
+    if(Math.abs(twistAxis) < 0.05){
+      twistAxis = 0;
+    }
+
+    if(Math.abs(throttleAxis) < 0.05){
+      throttleAxis = 0;
+    }
   }
 }
