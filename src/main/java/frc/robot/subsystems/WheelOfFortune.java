@@ -34,7 +34,6 @@ public class WheelOfFortune extends SubsystemBase {
   }
 
   public void startRotationControl(){
-    wheelOfFortuneCommand.setState(WheelOfFortuneCommand.ROTATION_CONTROL);
 
     //System.out.println("Start rotation control call");
 
@@ -43,7 +42,6 @@ public class WheelOfFortune extends SubsystemBase {
   }
 
   public void startPositionControl(){
-    wheelOfFortuneCommand.setState(WheelOfFortuneCommand.POSITION_CONTROL);
 
     // stop the rotation control
     //CommandScheduler.getInstance().cancel(m_rotationControl);

@@ -52,13 +52,8 @@ public class Robot extends TimedRobot {
     computerVision = new ComputerVision();
 
 
-    WheelOfFortuneCommand wheelOfFortuneCommand = new WheelOfFortuneCommand();
-
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
-    CommandScheduler.getInstance().setDefaultCommand(wheelOfFortune, wheelOfFortuneCommand);
     
-    wheelOfFortune.setWheelCommand(wheelOfFortuneCommand);
-
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
   }

@@ -92,8 +92,10 @@ public class DriveTrain extends SubsystemBase {
   public void curvatureDrive(double throttle, double curvatureInput,
       boolean isManual) {
     
-    double inverseKinematicsTurnThreshold = isManual? Constants.MANUAL_TURN_THRESHOLD: 1d;
-    double quickTurnThrustThreshold = isManual? Constants.MANUAL_QUICK_TURN_THROTTLE_THRESHOLD: 1d;
+    double inverseKinematicsTurnThreshold = isManual? Constants.MANUAL_TURN_THRESHOLD: 0d;
+    double quickTurnThrustThreshold = isManual? Constants.MANUAL_QUICK_TURN_THROTTLE_THRESHOLD: 0d;
+
+
 
     // if quick turn
     if(Math.abs(throttle) < quickTurnThrustThreshold){
@@ -107,6 +109,7 @@ public class DriveTrain extends SubsystemBase {
     // make sure that no motors go above 100% speed
     final double scalingFactor = Math.max(1.0,
         Math.max(Math.abs(signal.getLeftPercentage()), Math.abs(signal.getRightPercentage())));
+
     // apply the scale factor
     tankDrive(signal.getLeftPercentage() / scalingFactor, signal.getRightPercentage() / scalingFactor);
   }
