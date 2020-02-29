@@ -45,6 +45,7 @@ public class FieldMap {
     // outer port target dimensions (cm)
     // 3ft 3 1/4 in by 1 ft. 5 in
     public final static double[] OUTER_PORT_TARGET_DIMS = { 99.695, 43.18 };
+    public final static double TARGET_HEIGHT = 2.49555; // Metres
 
     public final static double DISTANCE_OF_INNER_PORT_FROM_OUTER_PORT = 74.295;
     public final static double DIAMETER_OF_THE_OUTER_PORT = 76.2; // TODO: try to shoot slightly higher because if the ball hits the wall below the inner port, it will bounce outside of the outer port. If it hits the wall above the inner port, it will still count for the upper port.

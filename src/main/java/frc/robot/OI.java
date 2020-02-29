@@ -17,6 +17,7 @@ import frc.robot.commands.RotationControl;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+
 public class OI {
 
   //// CREATING BUTTONS
@@ -72,5 +73,13 @@ public class OI {
     zAxis = stick.getZ();
     twistAxis = stick.getTwist();
     throttleAxis = stick.getThrottle();
+
+    if(Math.abs(twistAxis) < 0.05){
+      twistAxis = 0;
+    }
+
+    if(Math.abs(yAxis) < 0.05){
+      yAxis = 0;
+    }
   }
 }

@@ -31,22 +31,8 @@ public class WheelOfFortune extends SubsystemBase {
     System.out.println("Added rotation control");
   }
 
-  public void startRotationControl(){
-
-    //System.out.println("Start rotation control call");
-
-    // set the rotation control command
-    //CommandScheduler.getInstance().schedule(m_rotationControl);
-  }
-
-  public void startPositionControl(){
-    // stop the rotation control
-    //CommandScheduler.getInstance().cancel(m_rotationControl);
-  }
-
   @Override
   public void periodic() {
-    //System.out.println(getCurrentCommand());
-    // This method will be called once per scheduler run
+    
   }
 }

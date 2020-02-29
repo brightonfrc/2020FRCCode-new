@@ -60,12 +60,11 @@ public class DriveTrain extends SubsystemBase {
     this.m_motorRight1.set(ControlMode.PercentOutput, speed);
   }
 
-  // TODO: check if user input is less than epsilon in OI
-
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  // drives with set speeds for each side of motors
+  // drives with set speeds for each side of motor
+  // Input speeds from 0 to 1 (1 is full speed)
   public void tankDrive(final double leftSpeed, final double rightSpeed) {
     setLeftMotors(-leftSpeed);
     setRightMotors(rightSpeed);
@@ -90,25 +89,33 @@ public class DriveTrain extends SubsystemBase {
     tankDrive(leftSpeed, rightSpeed);
   }
 
-  // TODO: do not forget to change the OI input
   public void curvatureDrive(double throttle, double curvatureInput,
-      double inverseKinematicsTurnThreshold) {
+      boolean isManual) {
+    
+    double inverseKinematicsTurnThreshold = isManual? Constants.MANUAL_TURN_THRESHOLD: 0d;
+    double quickTurnThrustThreshold = isManual? Constants.MANUAL_QUICK_TURN_THROTTLE_THRESHOLD: 0d;
+
+
+
+    // if quick turn
+    if(Math.abs(throttle) < quickTurnThrustThreshold){
+      // set throttle to 0
+      throttle = 0d;
+    }
+
     // get the required amount of motor powers to turn
     final DriveSignal signal = DriveSignal.inverseKinematics(new Twist2d(throttle, 0.0, curvatureInput),
         inverseKinematicsTurnThreshold);
     // make sure that no motors go above 100% speed
     final double scalingFactor = Math.max(1.0,
         Math.max(Math.abs(signal.getLeftPercentage()), Math.abs(signal.getRightPercentage())));
+
     // apply the scale factor
     tankDrive(signal.getLeftPercentage() / scalingFactor, signal.getRightPercentage() / scalingFactor);
   }
 
   // if no threshold
   public void curvatureDrive(final double throttle, final double curvatureInput) {
-    curvatureDrive(throttle, curvatureInput, 0.0);
+    curvatureDrive(throttle, curvatureInput, false);
   }
-
-  // public void quickTurn(final double rotationSpeed) {
-  //   tankDrive(rotationSpeed, -rotationSpeed);
-  // }
 }
