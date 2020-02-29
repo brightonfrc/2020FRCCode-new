@@ -32,7 +32,7 @@ public class ManualFortuneWheelControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.wheelOfFortune.rotatingMotor.set(ControlMode.PercentOutput, Robot.oi.xAxis/Constants.MANUAL_CONTROL_WHEEL_OF_FORTUNE_ROTATION_SPEED);
+    Robot.wheelOfFortune.rotatingMotor.set(ControlMode.PercentOutput, Robot.oi.xAxis*Constants.MANUAL_CONTROL_WHEEL_OF_FORTUNE_ROTATION_SPEED);
   }
 
   // Called once the command ends or is interrupted.
