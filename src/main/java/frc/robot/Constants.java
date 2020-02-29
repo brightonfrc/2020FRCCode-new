@@ -53,7 +53,7 @@ public class Constants {
   public static final double LENGTH_E_C = 0.4; 
   // Note: define more displacement constants if needed above
 
-  public static final double SHOOTER_MOTORS_SPEED = 0.1;
+  public static final double SHOOTER_MOTORS_SPEED = 0.5;
 
   public static final int X_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 3 as a guesstimate (THESE VALUES ARE IN PIXELS)
   public static final int Y_TOLERANCE = 69; // --TEST THIS ON MONDAY-- // or use value 1 as a guesstimate
