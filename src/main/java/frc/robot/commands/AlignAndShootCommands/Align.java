@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Robot;
+import frc.robot.helperClasses.CVhelperWithPID;
 import frc.robot.Constants;
 
 public class Align extends CommandBase {
@@ -32,9 +33,13 @@ public class Align extends CommandBase {
 
   private PIDSubsystem distanceControl, angleControl;
 
+  private CVhelperWithPID anglePrediciton;
+
   // Constructor:
   public Align() {
     addRequirements(Robot.driveTrain);
+
+    anglePrediciton = new CVhelperWithPID();
 
     distanceControl = new PIDSubsystem(new PIDController(Constants.DRIVETRAIN_THRUST_P, Constants.DRIVETRAIN_THRUST_I, Constants.DRIVETRAIN_THRUST_D)){
     
@@ -92,12 +97,7 @@ public class Align extends CommandBase {
     yaw_angle_multiplier = 1;
     distance_angle_multiplier = 1;
 
-    // find left to right ratio
-    double[] yawAnddAdjusted = Robot.computerVision.getYawAnddAdjusted(x_centre, y_centre);
-
-    // these are the values for the PID
-    yaw_angle_adjusted = yawAnddAdjusted[0];
-    distance_d_adjusted = yawAnddAdjusted[1];
+    updateAngleAndDistance();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -126,7 +126,7 @@ public class Align extends CommandBase {
     // In any case, at least one side of the tank drive will be using full power
 
     double leftRaw = left_right_velocity_ratio;// l/r
-    double rightRaw = 1;// l
+    double rightRaw = 1;// 1
 
     double maxPower = Math.max(leftRaw, rightRaw);
 
@@ -136,76 +136,7 @@ public class Align extends CommandBase {
     // Actally rotating using tank drive.
     Robot.driveTrain.tankDrive(proportion_of_total_velocity_left, proportion_of_total_velocity_right);
 
-    // if(distance_d > Constants.DISTANCE_D) {
-    // if(left_right_velocity_ratio < 1) {
-    // proportion_of_total_velocity_right = 1;
-    // proportion_of_total_velocity_left = left_right_velocity_ratio;
-    // } else if(left_right_velocity_ratio > 1) {
-    // proportion_of_total_velocity_left = 1;
-    // proportion_of_total_velocity_right = Math.pow(left_right_velocity_ratio, -1);
-    // } else {
-    // proportion_of_total_velocity_left = 1;
-    // proportion_of_total_velocity_right = 1;
-    // }
-    // } else if(distance_d < Constants.DISTANCE_D) {
-    // if(left_right_velocity_ratio < 1) {
-    // proportion_of_total_velocity_right = -1;
-    // proportion_of_total_velocity_left = -(left_right_velocity_ratio);
-    // } else if(left_right_velocity_ratio > 1) {
-    // proportion_of_total_velocity_left = -1;
-    // proportion_of_total_velocity_right = -(Math.pow(left_right_velocity_ratio,
-    // -1));
-    // } else {
-    // proportion_of_total_velocity_left = -1;
-    // proportion_of_total_velocity_right = -1;
-    // }
-    // } else {
-    // if(yaw_angle_adjusted < 0) {
-    // proportion_of_total_velocity_right = -1;
-    // proportion_of_total_velocity_left = 1;
-    // } else if(yaw_angle_adjusted > 0) {
-    // proportion_of_total_velocity_right = 1;
-    // proportion_of_total_velocity_left = -1;
-    // } else {
-    // System.out.println("No need to rotate or move");
-    // }
-
-    // // Finding time (seconds) for which to rotate (assuming instant acceleration)
-    // double rotation_time = (Math.toRadians(yaw_angle_adjusted) *
-    // (Constants.DRIVE_WHEEL_TRACK_WIDTH / 2)) /
-    // (Math.abs((proportion_of_total_velocity_right *
-    // Constants.MAXIMUM_DRIVE_VELOCITY) - (proportion_of_total_velocity_left *
-    // Constants.MAXIMUM_DRIVE_VELOCITY)));
-
-    // Waiting for the robot to turn
-    // try {
-    // long rotation_time_milliseconds = (long) Math.round(rotation_time * 1000); //
-    // multiplied by a thousand to convert time to milliseconds
-    // long rotation_cutoff_time_milliseconds = (long) (rotation_time_milliseconds *
-    // Constants.TIME_CUTOFF_PROPORTION);
-    // Thread.sleep(rotation_time_milliseconds - rotation_cutoff_time_milliseconds);
-    // // The last constant is just to increase the speed of the entire AnS process
-    // by reducing overshoot for each
-    // } catch(InterruptedException ex) {
-    // Thread.currentThread().interrupt();
-    // }
-    // //Stopping robot (the simple way, no need for PID as command will repeat
-    // until threshold yaw angle and d is achieved):
-    // driveTrain.tankDrive(0, 0);
-    // try {
-    // Thread.sleep(Constants.TIME_DELAY_BEFORE_RESCAN);
-    // } catch(InterruptedException ex) {
-    // Thread.currentThread().interrupt();
-    // }
-
-    // TODO: update x and y centre
-
-    // update the values for the PID
-    double[] yawAnddAdjusted = Robot.computerVision.getYawAnddAdjusted(x_centre, y_centre);
-
-    // these are the values for the PID
-    yaw_angle_adjusted = yawAnddAdjusted[0];
-    distance_d_adjusted = yawAnddAdjusted[1];
+    updateAngleAndDistance();
   }
 
   // Called once the command ends or is interrupted.
@@ -228,6 +159,17 @@ public class Align extends CommandBase {
       return true;
     }
     return false;
+  }
+
+  private void updateAngleAndDistance(){
+    // TODO: update x and y centre
+
+    // update the values for the PID
+    double[] yawAnddAdjusted = Robot.computerVision.getYawAnddAdjusted(x_centre, y_centre);
+
+    // these are the values for the PID
+    yaw_angle_adjusted = yawAnddAdjusted[0];
+    distance_d_adjusted = yawAnddAdjusted[1];
   }
 
   private void debugRatio(double yaw_angle_adjusted, double left_right_velocity_ratio) {
