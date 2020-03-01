@@ -8,29 +8,23 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import edu.wpi.first.wpilibj.Servo;
 import frc.robot.Constants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-public class Shooter extends SubsystemBase {
+public class ShooterServo extends SubsystemBase {
 
-  private final VictorSPX m_motorLeft;
-  private final VictorSPX m_motorRight;
+  private final Servo gateServo;
 
-  public Shooter() {
-    m_motorLeft = new VictorSPX(Constants.SHOOTER_LEFT_MOTOR_ID);
-    m_motorRight = new VictorSPX(Constants.SHOOTER_RIGHT_MOTOR_ID);
-
-    m_motorRight.follow(m_motorLeft);
-    m_motorRight.setInverted(true);
-
-    // pre-spin the motors
-    m_motorLeft.set(ControlMode.PercentOutput, Constants.SHOOTER_MOTORS_SPEED);
+  public ShooterServo() {
+    gateServo = new Servo(6);
+    gateServo.set(0.5);
   }
 
   @Override
   public void periodic() {
   }
 }
-
