@@ -44,10 +44,7 @@ public class ComputerVision extends SubsystemBase {
     return 7d;
   }
 
-  public double[] getYawAnddAdjusted(double x_centre, double y_centre){
-    double pitch_angle = (y_centre - 239.5) * Constants.PIXEL_DEGREE_VERTICAL_CONVERT;
-    double yaw_angle = (x_centre - 319.5) * Constants.PIXEL_DEGREE_HORIZONTAL_CONVERT;
-
+  public double[] getYawAnddAdjusted(double pitch_angle, double yaw_angle){
     double distance_d = Math.sin(Math.toRadians(90 - Constants.ANGLE_I))
         * (Constants.DELTA_H / Math.sin(Math.toRadians(Constants.ANGLE_I + pitch_angle))); // This is the distance from
                                                                                            // the CAMERA to the centre

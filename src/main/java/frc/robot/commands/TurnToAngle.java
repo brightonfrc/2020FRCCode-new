@@ -90,13 +90,16 @@ public class TurnToAngle extends PIDCommand {
      */
 
     private static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-    public TurnToAngle(double targetAngleDegree) {
+
+    private static double turnToAngle;
+
+    public TurnToAngle() {
       super(
           new PIDController(Constants.DRIVETRAIN_ROTATION_P, Constants.DRIVETRAIN_ROTATION_I, Constants.DRIVETRAIN_ROTATION_D),
           // Close loop on heading
           TurnToAngle::getAngle,
           // Set reference to target
-          targetAngleDegree,
+          0,
           // Pipe output to turn robot
           output -> Robot.driveTrain.arcadeDrive(0, -output*0.3),
           // Require the drive
@@ -109,22 +112,23 @@ public class TurnToAngle extends PIDCommand {
       // Set the controller tolerance - the delta tolerance ensures the robot is stationary at the
       // setpoint before it is considered as having reached the reference
       getController()
-          .setTolerance(3, 0.9);
+          .setTolerance(3, 0.4);
     }
 
     @Override
     public void initialize(){
       gyro.reset();
+      turnToAngle = Robot.yawEntry.getDouble(0.0);
     }
 
     public static double getAngle(){
-      return gyro.getAngle();
+      System.out.println(gyro.getAngle()-turnToAngle);
+      return gyro.getAngle()-turnToAngle;
     }
   
     @Override
     public boolean isFinished() {
-      System.out.println(getAngle() - 30);
-      // End when the controller is at the reference.
+      System.out.println(getController().getSetpoint());
       return getController().atSetpoint();
     }
   }

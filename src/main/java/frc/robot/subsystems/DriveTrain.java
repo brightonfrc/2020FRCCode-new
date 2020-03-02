@@ -66,13 +66,13 @@ public class DriveTrain extends SubsystemBase {
   // drives with set speeds for each side of motor
   // Input speeds from 0 to 1 (1 is full speed)
   public void tankDrive(final double leftSpeed, final double rightSpeed) {
-    setLeftMotors(-leftSpeed);
-    setRightMotors(rightSpeed);
+    setLeftMotors(leftSpeed);
+    setRightMotors(-rightSpeed);
   }
 
   public void tankDrive(final DriveSignal driveSignal) {
     setLeftMotors(driveSignal.getLeftPercentage());
-    setRightMotors(driveSignal.getRightPercentage());
+    setRightMotors(-driveSignal.getRightPercentage());
   }
 
   // drive with a forward speed and rotation speed

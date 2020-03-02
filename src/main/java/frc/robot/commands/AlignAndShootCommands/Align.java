@@ -7,16 +7,11 @@
 
 package frc.robot.commands.AlignAndShootCommands;
 
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Robot;
-import frc.robot.helperClasses.CVhelperWithPID;
 import frc.robot.Constants;
 
-import edu.wpi.first.networktables.NetworkTable;
-import edu.wpi.first.networktables.NetworkTableEntry;
-import edu.wpi.first.networktables.NetworkTableInstance;
 public class Align extends CommandBase {
   /**
    * Creates a new Align (Uses drivetrain only)
@@ -27,51 +22,13 @@ public class Align extends CommandBase {
   double yaw_angle_adjusted = 0;
   double distance_d_adjusted = 0;
 
-  double yaw_angle_multiplier = 1;
-  double distance_angle_multiplier = 1;
-
-  private int x_centre = 69;
-  private int y_centre = 420; // TODO: GET THESE FROM NETWORK TABLE (X AND Y COORDS OF CENTRE (IMAGE
-                              // DIMENSIONS 640x480)
+  // double yaw_angle_multiplier = 1;
+  // double distance_angle_multiplier = 1;
 
   private PIDSubsystem distanceControl, angleControl;
 
-  private CVhelperWithPID anglePrediciton;
-
   // Constructor:
   public Align() {
-    addRequirements(Robot.driveTrain);
-
-    anglePrediciton = new CVhelperWithPID();
-
-    distanceControl = new PIDSubsystem(new PIDController(Constants.DRIVETRAIN_THRUST_P, Constants.DRIVETRAIN_THRUST_I, Constants.DRIVETRAIN_THRUST_D)){
-    
-      @Override
-      protected void useOutput(double output, double setpoint) {
-        // set the values
-        distance_angle_multiplier = output;
-      }
-    
-      @Override
-      protected double getMeasurement() {
-        // the distance adjusted should equal D, so
-        return Constants.DISTANCE_D - distance_d_adjusted;
-      }
-    };
-
-    angleControl = new PIDSubsystem(new PIDController(Constants.DRIVETRAIN_ROTATION_P, Constants.DRIVETRAIN_ROTATION_I, Constants.DRIVETRAIN_ROTATION_D)){
-    
-      @Override
-      protected void useOutput(double output, double setpoint) {
-        yaw_angle_multiplier = output;
-      }
-    
-      @Override
-      protected double getMeasurement() {
-        // the angle should be 0
-        return yaw_angle_adjusted;
-      }
-    };
   }
 
   // Called when the command is initially scheduled.
@@ -79,27 +36,6 @@ public class Align extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("AnS initialised; HANDS OFF JOYSTICKS");
-
-    // TODO: set the tolerances and setPoints
-
-    // reset the controllers
-    distanceControl.getController().reset();
-    angleControl.getController().reset();
-
-    distanceControl.getController().setTolerance(Constants.DRIVETRAIN_DISTANCE_TOLERANCE);
-    angleControl.getController().setTolerance(Constants.DRIVETRAIN_ANGLE_TOLERANCE);
-
-    distanceControl.setSetpoint(0);
-    angleControl.setSetpoint(0);
-
-    distanceControl.enable();
-    angleControl.enable();
-
-    // TODO: update x and y centre
-
-    yaw_angle_multiplier = 1;
-    distance_angle_multiplier = 1;
-
     updateAngleAndDistance();
   }
 
@@ -107,10 +43,10 @@ public class Align extends CommandBase {
   @Override
   public void execute() {
 
-    double left_right_velocity_ratio = (2 * (Constants.DISTANCE_D - distance_d_adjusted * distance_angle_multiplier)
-        - (Constants.DRIVE_WHEEL_TRACK_WIDTH * Math.sin(Math.toRadians(yaw_angle_adjusted * yaw_angle_multiplier))))
-        / (2 * (Constants.DISTANCE_D - distance_d_adjusted * distance_angle_multiplier)
-            + (Constants.DRIVE_WHEEL_TRACK_WIDTH * Math.sin(Math.toRadians(yaw_angle_adjusted * yaw_angle_multiplier)))); // MAINTAIN THIS
+    double left_right_velocity_ratio = (2 * (Constants.DISTANCE_D - distance_d_adjusted)
+        - (Constants.DRIVE_WHEEL_TRACK_WIDTH * Math.sin(Math.toRadians(yaw_angle_adjusted))))
+        / (2 * (Constants.DISTANCE_D - distance_d_adjusted)
+            + (Constants.DRIVE_WHEEL_TRACK_WIDTH * Math.sin(Math.toRadians(yaw_angle_adjusted)))); // MAINTAIN THIS
                                                                                                    // RATIO BETWEEN THE
                                                                                                    // VELOCITIES OF LEFT
                                                                                                    // AND RIGHT SIDES OF
@@ -145,15 +81,6 @@ public class Align extends CommandBase {
     // (Math.abs((proportion_of_total_velocity_right *
     // Constants.MAXIMUM_DRIVE_VELOCITY) - (proportion_of_total_velocity_left *
     // Constants.MAXIMUM_DRIVE_VELOCITY)));
-
-    // TODO: update x and y centre
-
-    // update the values for the PID
-    double[] yawAnddAdjusted = Robot.computerVision.getYawAnddAdjusted(x_centre, y_centre);
-
-    // these are the values for the PID
-    yaw_angle_adjusted = yawAnddAdjusted[0];
-    distance_d_adjusted = yawAnddAdjusted[1];
   }
 
   // Called once the command ends or is interrupted.
@@ -180,9 +107,12 @@ public class Align extends CommandBase {
 
   private void updateAngleAndDistance(){
     // TODO: update x and y centre
+    double pitch = Robot.pitchEntry.getDouble(0.0);
+    double yaw = Robot.yawEntry.getDouble(0.0);
+
 
     // update the values for the PID
-    double[] yawAnddAdjusted = Robot.computerVision.getYawAnddAdjusted(x_centre, y_centre);
+    double[] yawAnddAdjusted = Robot.computerVision.getYawAnddAdjusted(pitch, yaw);
 
     // these are the values for the PID
     yaw_angle_adjusted = yawAnddAdjusted[0];

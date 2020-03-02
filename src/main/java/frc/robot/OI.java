@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.TurnToAngle;
+import frc.robot.commands.DriveForTime;;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -56,7 +57,7 @@ public class OI {
 
     startTurnBtton = new JoystickButton(stick, 3);
 
-    startTurnBtton.whenActive(new TurnToAngle(30));
+    startTurnBtton.whenActive(new DriveForTime(0.2, 1000));
   }
 
   public void update(){
@@ -68,7 +69,5 @@ public class OI {
     zAxis = stick.getZ();
     twistAxis = stick.getTwist();
     throttleAxis = stick.getThrottle();
-
-    System.out.println(xAxis);
   }
 }

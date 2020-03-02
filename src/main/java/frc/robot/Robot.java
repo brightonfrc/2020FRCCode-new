@@ -35,15 +35,17 @@ import edu.wpi.first.networktables.NetworkTableInstance;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static OI oi;
   public static DriveTrain driveTrain;
   public static Shooter shooter;
   public static WheelOfFortune wheelOfFortune;
   public static ComputerVision computerVision;
   public static ShooterServo shooterServo;
 
-  NetworkTableEntry pitchEntry;
-  NetworkTableEntry yawEntry;
+  public static NetworkTableEntry pitchEntry;
+  public static NetworkTableEntry yawEntry;
+
+    public static OI oi;
+
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -59,8 +61,20 @@ public class Robot extends TimedRobot {
     shooterServo = new ShooterServo();
     wheelOfFortune = new WheelOfFortune();
     computerVision = new ComputerVision();
-    oi = new OI();
 
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+
+    //Get the table within that instance that contains the data. There can
+    //be as many tables as you like and exist to make it easier to organize
+    //your data. In this case, it's a table called datatable.
+    NetworkTable table = inst.getTable("vision");
+
+    //Get the entries within that table that correspond to the X and Y values
+    //for some operation in your program.
+    yawEntry = table.getEntry("yaw");
+    pitchEntry = table.getEntry("pitch");
+
+    oi = new OI();
 
     WheelOfFortuneCommand wheelOfFortuneCommand = new WheelOfFortuneCommand();
 
