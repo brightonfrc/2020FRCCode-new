@@ -15,8 +15,14 @@ import frc.robot.subsystems.ComputerVision;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.ShooterServo;
 import frc.robot.subsystems.WheelOfFortune;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.networktables.NetworkTableInstance;
+
 
 
 // Sceduler needs to run every period to keep the robot running
@@ -32,8 +38,12 @@ public class Robot extends TimedRobot {
   public static OI oi;
   public static DriveTrain driveTrain;
   public static Shooter shooter;
+  public static ShooterServo shooterServo;
   public static WheelOfFortune wheelOfFortune;
   public static ComputerVision computerVision;
+
+  public static NetworkTableEntry pitchEntry;
+  public static NetworkTableEntry yawEntry;
 
   Command m_autonomousCommand;
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -48,6 +58,20 @@ public class Robot extends TimedRobot {
     shooter = new Shooter();
     wheelOfFortune = new WheelOfFortune();
     computerVision = new ComputerVision();
+    shooterServo = new ShooterServo();
+
+    NetworkTableInstance inst = NetworkTableInstance.getDefault();
+
+    //Get the table within that instance that contains the data. There can
+    //be as many tables as you like and exist to make it easier to organize
+    //your data. In this case, it's a table called datatable.
+    NetworkTable table = inst.getTable("vision");
+
+    //Get the entries within that table that correspond to the X and Y values
+    //for some operation in your program.
+    yawEntry = table.getEntry("yaw");
+    pitchEntry = table.getEntry("pitch");
+
     oi = new OI();
 
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
