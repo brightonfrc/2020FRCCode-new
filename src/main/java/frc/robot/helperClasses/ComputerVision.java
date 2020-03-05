@@ -44,6 +44,8 @@ public class ComputerVision  {
     return 7d;
   }
 
+
+  // PAV ALGO Ds
   // TODO: make sure to call this before yawAdjusted
   public double getdAdjusted(double pitch_angle, double yaw_angle){
     double distance_d = Constants.DELTA_H / Math.tan(Math.toRadians(Constants.ANGLE_I + pitch_angle)); // This is the distance from
@@ -71,5 +73,11 @@ public class ComputerVision  {
     this.yaw_angle_adjusted = yaw_angle_adjusted;
 
     return yaw_angle_adjusted;
+  }
+
+  // INSURANCE Ds
+  public double getD(double pitch_angle){
+    double distance = Constants.DELTA_H / Math.tan(Math.toRadians(Constants.ANGLE_I + pitch_angle));
+    return distance;
   }
 }
