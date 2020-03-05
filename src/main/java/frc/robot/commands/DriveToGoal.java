@@ -28,11 +28,11 @@ public class DriveToGoal extends PIDCommand {
           // Set reference to target
           0,
           // Pipe output to turn robot
-          output -> Robot.driveTrain.arcadeDrive(-output*0.3, 0),
+          output -> Robot.driveTrain.arcadeDrive(-output*0.15, 0),
           // Require the drive
           Robot.driveTrain);
 
-      getController().setTolerance(3, 0.4);
+      getController().setTolerance(0.2, 0.5);
     }
 
     @Override
@@ -41,10 +41,9 @@ public class DriveToGoal extends PIDCommand {
 
     public static double getError(){
       double pitch = Robot.pitchEntry.getDouble(0.0);
-      double yaw = Robot.yawEntry.getDouble(0.0);
 
-      System.out.println(Constants.DISTANCE_D - Robot.computerVision.getdAdjusted(pitch, yaw));
-      return Constants.DISTANCE_D - Robot.computerVision.getdAdjusted(pitch, yaw);
+      System.out.println(Constants.DISTANCE_D - Robot.computerVision.getD(pitch));
+      return Constants.DISTANCE_D - Robot.computerVision.getD(pitch);
     }
   
     @Override
