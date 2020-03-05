@@ -38,7 +38,7 @@ public class Constants {
   // accounting for component displacement: all in metres (NOTE: c = camera; e = centre of robot; t = tip of shooter)
   public static final double LENGTH_E_C = 0.4; 
 
-  // TODO: replace "69" with actual values! 
+  // TODO: calibrate
   public static final int CAMERA_RESOLUTION_X = 640;
   public static final int CAMERA_RESOLUTION_Y = 480;
   public static final double HEIGHT_OF_CAMERA_FROM_FLOOR = 0.87; // Meters
@@ -58,9 +58,10 @@ public class Constants {
 
   public static final double SHOOTER_MOTORS_SPEED = 0.5;
 
-  public static final int X_TOLERANCE = 3; // --TEST THIS ON MONDAY-- // or use value 3 as a guesstimate (THESE VALUES ARE IN PIXELS)
-  public static final int Y_TOLERANCE = 1; // --TEST THIS ON MONDAY-- // or use value 1 as a guesstimate
+  public static final int SHOOTER_MILLIS_TO_RELEASE = 1500;
+  public static final int SHOOTER_COMMAND_TIME_TO_FINISH = 7000;
 
+  
   // robot constants
   
   public static final I2C.Port COLOR_SENSOR_I2C_PORT = I2C.Port.kOnboard;
@@ -83,15 +84,14 @@ public class Constants {
   public static final double DRIVETRAIN_THRUST_I = 1;
   public static final double DRIVETRAIN_THRUST_D = 1;
 
-  public static final double DRIVETRAIN_ROTATION_P = 1;
+  public static final double DRIVETRAIN_ROTATION_P = 0.05;
   public static final double DRIVETRAIN_ROTATION_I = 1;
-  public static final double DRIVETRAIN_ROTATION_D = 1;
+  public static final double DRIVETRAIN_ROTATION_D = 0.005;
 
   public static final double DRIVETRAIN_AUTONOMOUS_SPEED = 1;
 
 
   public static final double MINIMAL_DISTANCE_FOR_SHOOTING_RANGE_CHECK = 5;
-
 
   // Wheel of fortune code
   public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.2; 

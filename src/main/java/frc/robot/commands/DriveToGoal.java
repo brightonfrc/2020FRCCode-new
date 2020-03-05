@@ -8,12 +8,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.Constants;
 
-public class TurnToAngleVision extends PIDCommand {
+public class DriveToGoal extends PIDCommand {
     /**
      * Turns to robot to the specified angle.
      *
@@ -21,36 +20,31 @@ public class TurnToAngleVision extends PIDCommand {
      * @param drive              The drive subsystem to use
      */
 
-    private static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-
-    private static double turnToAngle;
-
-    public TurnToAngleVision() {
+    public DriveToGoal() {
       super(
           new PIDController(Constants.DRIVETRAIN_ROTATION_P, Constants.DRIVETRAIN_ROTATION_I, Constants.DRIVETRAIN_ROTATION_D),
           // Close loop on heading
-          TurnToAngleVision::getError,
+          DriveToGoal::getError,
           // Set reference to target
           0,
           // Pipe output to turn robot
-          output -> Robot.driveTrain.arcadeDrive(0, -output*0.3),
+          output -> Robot.driveTrain.arcadeDrive(-output*0.3, 0),
           // Require the drive
           Robot.driveTrain);
 
-        getController().enableContinuousInput(-180, 180);
-      getController()
-          .setTolerance(3, 0.4);
+      getController().setTolerance(3, 0.4);
     }
 
     @Override
     public void initialize(){
-      gyro.reset();
-      turnToAngle = Robot.yawEntry.getDouble(0.0);
     }
 
     public static double getError(){
-      System.out.println(gyro.getAngle()-turnToAngle);
-      return gyro.getAngle()-turnToAngle;
+      double pitch = Robot.pitchEntry.getDouble(0.0);
+      double yaw = Robot.yawEntry.getDouble(0.0);
+
+      System.out.println(Constants.DISTANCE_D - Robot.computerVision.getdAdjusted(pitch, yaw));
+      return Constants.DISTANCE_D - Robot.computerVision.getdAdjusted(pitch, yaw);
     }
   
     @Override
