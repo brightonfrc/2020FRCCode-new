@@ -83,9 +83,9 @@ public class Constants {
   public static final double DRIVETRAIN_THRUST_I = 1;
   public static final double DRIVETRAIN_THRUST_D = 1;
 
-  public static final double DRIVETRAIN_ROTATION_P = 1;
+  public static final double DRIVETRAIN_ROTATION_P = 0.05;
   public static final double DRIVETRAIN_ROTATION_I = 1;
-  public static final double DRIVETRAIN_ROTATION_D = 1;
+  public static final double DRIVETRAIN_ROTATION_D = 0.005;
 
   public static final double DRIVETRAIN_AUTONOMOUS_SPEED = 1;
 

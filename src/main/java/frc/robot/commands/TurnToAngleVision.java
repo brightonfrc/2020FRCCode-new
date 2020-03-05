@@ -8,11 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.Constants;
 
@@ -32,7 +29,7 @@ public class TurnToAngleVision extends PIDCommand {
       super(
           new PIDController(Constants.DRIVETRAIN_ROTATION_P, Constants.DRIVETRAIN_ROTATION_I, Constants.DRIVETRAIN_ROTATION_D),
           // Close loop on heading
-          TurnToAngleVision::getAngle,
+          TurnToAngleVision::getError,
           // Set reference to target
           0,
           // Pipe output to turn robot
@@ -40,7 +37,6 @@ public class TurnToAngleVision extends PIDCommand {
           // Require the drive
           Robot.driveTrain);
 
-      gyro.reset();
         getController().enableContinuousInput(-180, 180);
       getController()
           .setTolerance(3, 0.4);
@@ -52,7 +48,7 @@ public class TurnToAngleVision extends PIDCommand {
       turnToAngle = Robot.yawEntry.getDouble(0.0);
     }
 
-    public static double getAngle(){
+    public static double getError(){
       System.out.println(gyro.getAngle()-turnToAngle);
       return gyro.getAngle()-turnToAngle;
     }

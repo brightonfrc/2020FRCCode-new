@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ComputerVision extends SubsystemBase {
   /**
@@ -39,6 +40,24 @@ public class ComputerVision extends SubsystemBase {
 
   public double getDistanceToTarget(){
     return 7d;
+  }
+
+  public double[] getYawAnddAdjusted(double x_centre, double y_centre){
+    double pitch_angle = (y_centre - 239.5) * Constants.PIXEL_DEGREE_VERTICAL_CONVERT;
+    double yaw_angle = (x_centre - 319.5) * Constants.PIXEL_DEGREE_HORIZONTAL_CONVERT;
+
+    double distance_d = Math.sin(Math.toRadians(90 - Constants.ANGLE_I))
+        * (Constants.DELTA_H / Math.sin(Math.toRadians(Constants.ANGLE_I + pitch_angle))); // This is the distance from
+                                                                                           // the CAMERA to the centre
+                                                                                           // of target
+    double distance_d_adjusted = Math.sqrt((Math.pow(distance_d, 2)) + (Math.pow(Constants.LENGTH_E_C, 2))
+        - ((2 * distance_d * Constants.LENGTH_E_C) * Math.cos(Math.toRadians(180 - yaw_angle)))); // This is the
+                                                                                                  // distance from the
+                                                                                                  // CENTRE OF ROBOT (E)
+                                                                                                  // to centre of target
+    double yaw_angle_adjusted = distance_d * (distance_d_adjusted / (180 - yaw_angle));
+    double[] output =  {yaw_angle_adjusted, distance_d_adjusted};
+    return output;
   }
 
   @Override
