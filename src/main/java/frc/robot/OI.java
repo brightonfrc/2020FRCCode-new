@@ -14,6 +14,7 @@ import frc.robot.commands.ManualFortuneWheelControl;
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.TurnToAngleVision;
 import frc.robot.commands.DriveToGoal;
+import frc.robot.commands.TimeDriveToGoal;
 import frc.robot.commands.Align;
 import frc.robot.commands.Shoot;
 
@@ -72,7 +73,7 @@ public class OI {
     rotationAlignButton.whenActive(new TurnToAngleVision());
 
     // Backup
-    // distanceAlignButton.whenActive(new DriveToGoal());
+    // distanceAlignButton.whenActive(new TimeDriveToGoal());
 
     // Pav's
     distanceAlignButton.whenActive(new Align());

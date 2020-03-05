@@ -117,4 +117,7 @@ public class Constants {
   public static Color YELLOW_TARGET = ColorMatch.makeColor(YELLOW_VALUES[0], YELLOW_VALUES[1], YELLOW_VALUES[2]);
 
   public static final Color[] CLOCKWISE_COLORS_ON_THE_WHEEL = {BLUE_TARGET, GREEN_TARGET, RED_TARGET, YELLOW_TARGET}; 
+
+  public static final double SLIP_DISTANCE = 0.1;
+  public static final double MAX_SPEED = 0.2;
 }
