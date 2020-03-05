@@ -58,9 +58,10 @@ public class Constants {
 
   public static final double SHOOTER_MOTORS_SPEED = 0.5;
 
-  public static final int X_TOLERANCE = 3; // --TEST THIS ON MONDAY-- // or use value 3 as a guesstimate (THESE VALUES ARE IN PIXELS)
-  public static final int Y_TOLERANCE = 1; // --TEST THIS ON MONDAY-- // or use value 1 as a guesstimate
+  public static final int SHOOTER_MILLIS_TO_RELEASE = 1500;
+  public static final int SHOOTER_COMMAND_TIME_TO_FINISH = 7000;
 
+  
   // robot constants
   
   public static final I2C.Port COLOR_SENSOR_I2C_PORT = I2C.Port.kOnboard;
@@ -91,7 +92,6 @@ public class Constants {
 
 
   public static final double MINIMAL_DISTANCE_FOR_SHOOTING_RANGE_CHECK = 5;
-
 
   // Wheel of fortune code
   public static final double WHEEL_OF_FORTUNE_ROTATION_SPEED = 0.2; 

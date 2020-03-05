@@ -25,7 +25,7 @@ public class ShooterServo extends SubsystemBase {
   }
 
   public void closeGap(){
-
+    gateServo.set(1);
   }
 
   public void openGap(){

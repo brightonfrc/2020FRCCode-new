@@ -21,11 +21,22 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     this.m_shooterLeft = new VictorSPX(Constants.SHOOTER_LEFT);
     this.m_shooterRight = new VictorSPX(Constants.SHOOTER_RIGHT);
+
+    m_shooterRight.follow(m_shooterLeft);
+    m_shooterRight.setInverted(true);
+
+    // startMotors();
   }
 
   @Override
   public void periodic() {
-    //this.m_shooterLeft.set(ControlMode.PercentOutput, 0.5);
-    //this.m_shooterRight.set(ControlMode.PercentOutput, -0.5);
+  }
+
+  public void startMotors(){
+    this.m_shooterLeft.set(ControlMode.PercentOutput, Constants.SHOOTER_MOTORS_SPEED);
+  }
+
+  public void stopMotors(){
+    this.m_shooterLeft.set(ControlMode.PercentOutput, 0);
   }
 }
