@@ -138,7 +138,7 @@ public class Align extends PIDCommand {
     
     // these are the values for the PID
     distance_d_adjusted = Robot.computerVision.getdAdjusted(pitch, yaw);
-    yaw_angle_adjusted = Robot.computerVision.getYawAdjusted(yaw);
+    yaw_angle_adjusted = Robot.computerVision.getYawAdjusted();
 
     turnToAngle = yaw_angle_adjusted;
   }
