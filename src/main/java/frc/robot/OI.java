@@ -13,7 +13,6 @@ import frc.robot.commands.ManualFortuneWheelControl;
 
 import frc.robot.commands.RotationControl;
 import frc.robot.commands.Shoot;
-import frc.robot.subsystems.Shooter;
 
 /**
  * This class is the glue that binds the controls on the physical operator

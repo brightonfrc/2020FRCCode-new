@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands.AlignAndShootCommands;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -130,17 +130,15 @@ public class Align extends PIDCommand {
   }
 
   private void updateAngleAndDistance(){
-    // TODO: update x and y centre
     double pitch = Robot.pitchEntry.getDouble(0.0);
     double yaw = Robot.yawEntry.getDouble(0.0);
 
 
     // update the values for the PID
-    double[] yawAnddAdjusted = Robot.computerVision.getYawAnddAdjusted(pitch, yaw);
-
+    
     // these are the values for the PID
-    yaw_angle_adjusted = yawAnddAdjusted[0];
-    distance_d_adjusted = yawAnddAdjusted[1];
+    distance_d_adjusted = Robot.computerVision.getdAdjusted(pitch, yaw);
+    yaw_angle_adjusted = Robot.computerVision.getYawAdjusted(yaw);
 
     turnToAngle = yaw_angle_adjusted;
   }

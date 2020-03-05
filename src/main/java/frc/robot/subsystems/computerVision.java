@@ -14,6 +14,9 @@ public class ComputerVision extends SubsystemBase {
   /**
    * Creates a new computerVision.
    */
+
+  private double distance_d, distance_d_adjusted, yaw_angle_adjusted;
+
   // constants:
 
   final static int WIDTH = 0;
@@ -33,19 +36,7 @@ public class ComputerVision extends SubsystemBase {
   // here. Call these from Commands.
   }
 
-  // TODO: change this
-  public double getAngleToTarget(){
-    return 0d;
-  }
-
-  public double getDistanceToTarget(){
-    return 7d;
-  }
-
-  public double[] getYawAnddAdjusted(double x_centre, double y_centre){
-    double pitch_angle = (y_centre - 239.5) * Constants.PIXEL_DEGREE_VERTICAL_CONVERT;
-    double yaw_angle = (x_centre - 319.5) * Constants.PIXEL_DEGREE_HORIZONTAL_CONVERT;
-
+  public double getdAdjusted(double pitch_angle, double yaw_angle){
     double distance_d = Math.sin(Math.toRadians(90 - Constants.ANGLE_I))
         * (Constants.DELTA_H / Math.sin(Math.toRadians(Constants.ANGLE_I + pitch_angle))); // This is the distance from
                                                                                            // the CAMERA to the centre
@@ -55,9 +46,15 @@ public class ComputerVision extends SubsystemBase {
                                                                                                   // distance from the
                                                                                                   // CENTRE OF ROBOT (E)
                                                                                                   // to centre of target
+    this.distance_d_adjusted = distance_d_adjusted;
+    this.distance_d = distance_d;
+    return distance_d_adjusted;
+  }
+
+  public double getYawAdjusted(double yaw_angle){
     double yaw_angle_adjusted = distance_d * (distance_d_adjusted / (180 - yaw_angle));
-    double[] output =  {yaw_angle_adjusted, distance_d_adjusted};
-    return output;
+    this.yaw_angle_adjusted = yaw_angle_adjusted;
+    return yaw_angle_adjusted;
   }
 
   @Override

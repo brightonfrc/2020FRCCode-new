@@ -38,7 +38,7 @@ public class Constants {
   // accounting for component displacement: all in metres (NOTE: c = camera; e = centre of robot; t = tip of shooter)
   public static final double LENGTH_E_C = 0.4; 
 
-  // TODO: replace "69" with actual values! 
+  // TODO: calibrate
   public static final int CAMERA_RESOLUTION_X = 640;
   public static final int CAMERA_RESOLUTION_Y = 480;
   public static final double HEIGHT_OF_CAMERA_FROM_FLOOR = 0.87; // Meters
