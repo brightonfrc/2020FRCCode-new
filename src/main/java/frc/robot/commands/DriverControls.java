@@ -39,7 +39,7 @@ public class DriverControls extends CommandBase {
 
     double speedMultiplier = Constants.MANUAL_DRIVE_MULTIPLIER;
 
-    if(Robot.oi.stick.getRawButton(11)){
+    if(Robot.oi.stick.getRawButton(11) || Robot.oi.stick.getRawButton(12)){
       speedMultiplier = Constants.SLOW_MANUAL_DRIVE_MULTIPLIER;
     }
 

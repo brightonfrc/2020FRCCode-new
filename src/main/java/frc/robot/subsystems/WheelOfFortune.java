@@ -28,7 +28,7 @@ public class WheelOfFortune extends SubsystemBase {
   }
 
   public void initDefaultCommand() {
-    System.out.println("Added rotation control");
+    System.out.println("Rotation control");
   }
 
   @Override

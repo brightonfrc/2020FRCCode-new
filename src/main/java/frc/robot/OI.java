@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ManualFortuneWheelControl;
 
 import frc.robot.commands.RotationControl;
+import frc.robot.commands.Shoot;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -52,16 +54,25 @@ public class OI {
 
   public double xAxis, yAxis, zAxis, twistAxis, throttleAxis;
 
-  static JoystickButton rotationControlButton, positionControlButton, manualWHeelControlButton;
+  static JoystickButton rotationControlButton, manualWHeelControlButton;
+  static JoystickButton shootButton;
 
   public OI() {
     stick = new Joystick(0);
+
     rotationControlButton = new JoystickButton(stick, 1);
-    positionControlButton = new JoystickButton(stick, 2);
     manualWHeelControlButton = new JoystickButton(stick, 4);
 
     rotationControlButton.whenActive(new RotationControl());
     manualWHeelControlButton.whileHeld(new ManualFortuneWheelControl());
+
+    shootButton = new JoystickButton(stick, 8);
+
+    shootButton.whenActive(new Shoot());
+
+    //TODO: Align
+
+    //TODO: Climber  
   }
 
   public void update(){
