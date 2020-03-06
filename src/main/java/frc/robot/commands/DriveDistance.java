@@ -8,25 +8,20 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.customDatatypes.DriveSignal;
+import frc.robot.subsystems.DriveTrain;
 
-
-public class TimeDriveToGoal extends CommandBase {
+public class DriveDistance extends CommandBase {
   /**
-   * Creates a new SpeedTest.
+   * Creates a new DriveDistance.
    */
 
-  protected double power;
-  protected double distance;
-  protected double time;
-  protected double endTime;
+  private long startTime = 0;
+  private long timeToDrive = 0;
 
-  /**
-   * Time is in milliseconds
-   */
-  public TimeDriveToGoal() {
+  public DriveDistance() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.driveTrain);
   }
@@ -34,35 +29,33 @@ public class TimeDriveToGoal extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
-    this.power = 0.2;
-
-    double pitch = Robot.pitchEntry.getDouble(0.0);
-
-    this.distance = Robot.computerVision.getD(pitch) - Constants.DISTANCE_D;
-
-    this.time = (this.distance - Constants.SLIP_DISTANCE)/Constants.MAX_SPEED;
-    long startTime = System.currentTimeMillis();
-
-    this.endTime = startTime + this.time;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.driveTrain.tankDrive(this.power, this.power);
+  }
+
+  public void goDistance(double d){
+    // // if impossible to move,
+    // if(d < Constants.BREAK_AND_START_DISTANCE){
+    //   throw new Error("Can not do timed movement on such short distances");
+    //   return;
+    // }
+
+    // timeToDrive = 1000 * (d - Constants.BREAK_AND_START_DISTANCE) / Constants.ROBOT_SPEED;
+    // Robot.driveTrain.arcadeDrive(0.3, 0.0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(final boolean interrupted) {
-    // stop the drivetrain
+  public void end(boolean interrupted) {
     Robot.driveTrain.tankDrive(DriveSignal.NEUTRAL);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return System.currentTimeMillis() >= this.endTime;
+    return timeToDrive != 0 && System.currentTimeMillis() - startTime > timeToDrive;
   }
 }

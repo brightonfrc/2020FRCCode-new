@@ -8,16 +8,13 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.helperClasses.ComputerVision;
-<<<<<<< HEAD
 import frc.robot.subsystems.Climber;
-=======
->>>>>>> e0b75dbbbcbbd35e7f8223fa9e3b1a8bebe3134b
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
+import frc.robot.commands.Shoot;
+import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.ShooterServo;
 import frc.robot.subsystems.WheelOfFortune;
@@ -51,7 +48,20 @@ public class Robot extends TimedRobot {
   public static NetworkTableEntry yawEntry;
 
   Command m_autonomousCommand;
-  SendableChooser<Command> m_chooser = new SendableChooser<>();
+
+  private Command[] autonomousCommandSequence = {
+    //TODO: align
+    new Shoot(),
+    // TODO: go back
+    // turn around the bar
+    //TODO: check the angle
+    new TurnToAngle(30),
+    // TODO: go back
+    // turn back
+    new TurnToAngle(-30),
+    // TODO: go back
+  };
+  private int autonomousCommandSequenceIndex = 0;
 
   /**
    * This function is run when the robot is first started up and should be
@@ -83,7 +93,6 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
     
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**
@@ -129,17 +138,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_chooser.getSelected();
-
-    /*
-     * String autoSelected = SmartDashboard.getString("Auto Selector",
-     * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-     * = new MyAutoCommand(); break; case "Default Auto": default:
-     * autonomousCommand = new ExampleCommand(); break; }
-     */
-
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
+      if(autonomousCommandSequenceIndex < autonomousCommandSequence.length){
+        m_autonomousCommand = autonomousCommandSequence[autonomousCommandSequenceIndex];
+        autonomousCommandSequenceIndex++;
+      }
+
       m_autonomousCommand.schedule();
     }
   }
