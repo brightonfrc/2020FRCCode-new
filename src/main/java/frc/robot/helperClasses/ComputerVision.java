@@ -71,7 +71,7 @@ public class ComputerVision  {
     double yaw_angle_adjusted = Math.toDegrees(Math.atan((distance_d + Constants.LENGTH_E_C) / side_d));
 
     this.yaw_angle_adjusted = yaw_angle_adjusted;
-    
+
     return yaw_angle_adjusted;
   }
 

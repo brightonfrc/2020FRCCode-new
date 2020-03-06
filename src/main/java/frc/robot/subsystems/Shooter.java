@@ -19,8 +19,8 @@ public class Shooter extends SubsystemBase {
   private final VictorSPX m_shooterRight;
 
   public Shooter() {
-    this.m_shooterLeft = new VictorSPX(Constants.SHOOTER_LEFT);
-    this.m_shooterRight = new VictorSPX(Constants.SHOOTER_RIGHT);
+    this.m_shooterLeft = new VictorSPX(Constants.SHOOTER_LEFT_ID);
+    this.m_shooterRight = new VictorSPX(Constants.SHOOTER_RIGHT_ID);
 
     m_shooterRight.follow(m_shooterLeft);
     m_shooterRight.setInverted(true);

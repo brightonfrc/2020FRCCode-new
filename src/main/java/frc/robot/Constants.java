@@ -23,16 +23,19 @@ public class Constants {
   public static final int MOTOR_LEFT_2_ID = 1;
   public static final int MOTOR_RIGHT_1_ID = 2;
   public static final int MOTOR_RIGHT_2_ID = 3;
-  public static final int SHOOTER_LEFT = 5;
-  public static final int SHOOTER_RIGHT = 6;
 
+  public static final int SHOOTER_LEFT_ID = 5;
+  public static final int SHOOTER_RIGHT_ID = 6;
 
   public static final int WHEEL_OF_FORTUNE_MOTOR_ID = 7;
 
-  public static final int SHOOTER_LEFT_MOTOR_ID = 5;
-  public static final int SHOOTER_RIGHT_MOTOR_ID = 6;
+  public static final int CLIMBER_MOTOR_LEFT_ID = 8;
+  public static final int CLIMBER_MOTOR_RIGHT_ID = 9;
 
   // robot constants
+
+  // climber
+  public static final double CLIMBER_MOTOR_MAX_SPEED = 0.2;
 
   // constants for automatic shooting w/CV:
   // accounting for component displacement: all in metres (NOTE: c = camera; e = centre of robot; t = tip of shooter)

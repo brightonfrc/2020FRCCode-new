@@ -12,6 +12,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.helperClasses.ComputerVision;
+<<<<<<< HEAD
+import frc.robot.subsystems.Climber;
+=======
+>>>>>>> e0b75dbbbcbbd35e7f8223fa9e3b1a8bebe3134b
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriverControls;
 import frc.robot.subsystems.Shooter;
@@ -41,6 +45,7 @@ public class Robot extends TimedRobot {
   public static ShooterServo shooterServo;
   public static WheelOfFortune wheelOfFortune;
   public static ComputerVision computerVision;
+  public static Climber climber;
 
   public static NetworkTableEntry pitchEntry;
   public static NetworkTableEntry yawEntry;
@@ -59,6 +64,7 @@ public class Robot extends TimedRobot {
     wheelOfFortune = new WheelOfFortune();
     computerVision = new ComputerVision();
     shooterServo = new ShooterServo();
+    climber = new Climber();
 
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
 
