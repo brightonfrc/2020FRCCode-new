@@ -18,7 +18,10 @@ import frc.robot.Robot;
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class Align extends PIDCommand {
   /**
-   * Creates a new Align.
+   * Creates a new Align command
+   * It is used by the drivetrain subsystem
+   * The Align command is one of the three commands that align the robot to face the goal. It uses Pavel's algorithm to align both the angle and the distance at the same time along with the PID.
+   * WARNING: it does not work
    */
 
   private static double yaw_angle_adjusted, distance_d_adjusted;
@@ -39,6 +42,7 @@ public class Align extends PIDCommand {
         Align::correctForError
         );
 
+    // PID based on the gyro readings
     gyro.reset();
     getController().enableContinuousInput(-180, 180);
     getController().setTolerance(3, 0.4);
@@ -88,7 +92,7 @@ public class Align extends PIDCommand {
   }
 
   private static void correctForError(double errorMultiplier){
-
+    // Pavel's algorithm uses the values provided by the computer vision subsystem to calculate the ratio of velocities of the wheels on each side to achieve the desired roatation and position
     double left_right_velocity_ratio = (2 * (Constants.DISTANCE_D - distance_d_adjusted)
         - (Constants.DRIVE_WHEEL_TRACK_WIDTH * Math.sin(Math.toRadians(yaw_angle_adjusted))))
         / (2 * (Constants.DISTANCE_D - distance_d_adjusted)
@@ -101,6 +105,7 @@ public class Align extends PIDCommand {
                                                                                                    // below:
     double proportion_of_total_velocity_right = 0;
     double proportion_of_total_velocity_left = 0;
+
 
     debugRatio(yaw_angle_adjusted, left_right_velocity_ratio);
 
@@ -129,7 +134,9 @@ public class Align extends PIDCommand {
     // Constants.MAXIMUM_DRIVE_VELOCITY)));
   }
 
+  // gets the values from the computer vision subclass
   private void updateAngleAndDistance(){
+    
     double pitch = Robot.pitchEntry.getDouble(0.0);
     double yaw = Robot.yawEntry.getDouble(0.0);
 
@@ -143,7 +150,7 @@ public class Align extends PIDCommand {
     turnToAngle = yaw_angle_adjusted;
   }
 
-
+  // used for debugging to print whether the ratio produced by Pavel's algorithm is correct
   private static void debugRatio(double yaw_angle_adjusted, double left_right_velocity_ratio) {
     if (yaw_angle_adjusted < 0) {
       System.out.println("Rotating Anticlockwise");

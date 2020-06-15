@@ -2,7 +2,7 @@ package frc.robot.customDatatypes;
 
 import frc.robot.Constants;
 
-// analogue for team 254
+// analogue for team 254's solution
 // stores percentage speed for drivetrain
 
 public class DriveSignal{

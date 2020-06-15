@@ -15,11 +15,12 @@ import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
   /**
-   * Creates a new Climber.
+   * The subsystem used for the control of the climber
    */
   private VictorSPX m_motorLeft, m_motorRight;
 
   public Climber() {
+    // get the Victors
     m_motorRight = new VictorSPX(Constants.CLIMBER_MOTOR_RIGHT_ID);
     m_motorLeft = new VictorSPX(Constants.CLIMBER_MOTOR_LEFT_ID);
   }

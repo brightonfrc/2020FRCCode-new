@@ -1,6 +1,9 @@
 package frc.robot;
 
 public class FieldMap {
+    /**
+    * This class contains the dimensions of the feild
+    */
 
     // dimensions
     public static final int X = 0;

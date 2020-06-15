@@ -16,7 +16,9 @@ import frc.robot.Constants;
 public class TurnToAngleVision extends PIDCommand {
     /**
      * Turns to robot to the specified angle.
-     *
+     * Requires the drivetrain subsystem
+     * Turns towards the target based on the computer vision values and PID
+     * 
      * @param targetAngleDegrees The angle to turn to
      * @param drive              The drive subsystem to use
      */

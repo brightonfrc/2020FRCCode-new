@@ -16,6 +16,8 @@ import frc.robot.customDatatypes.DriveSignal;
 public class TimeDriveToGoal extends CommandBase {
   /**
    * Creates a new SpeedTest.
+   * Requires the drivetrain subsystem
+   * Drives forward at a set power percentage while recording the time. It is used to record the speed values for DriveDistance
    */
 
   protected double power;

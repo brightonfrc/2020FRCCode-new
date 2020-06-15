@@ -16,11 +16,11 @@ import frc.robot.customDatatypes.Twist2d;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
+public class DriveTrain extends SubsystemBase {  
+  /**
+   * Drivetrain subsystem for enhanced control of the drivetrain
+   */
 
-/**
- * Add your docs here.
- */
-public class DriveTrain extends SubsystemBase {
   private final VictorSPX m_motorLeft1;
   private final VictorSPX m_motorLeft2;
   private final VictorSPX m_motorRight1;
@@ -33,6 +33,7 @@ public class DriveTrain extends SubsystemBase {
   // private final DifferentialDrive m_differentialDrive;
 
   public DriveTrain() {
+    // get the Victors and group them based on which side they are found
     m_motorLeft1 = new VictorSPX(Constants.MOTOR_LEFT_1_ID);
     m_motorLeft2 = new VictorSPX(Constants.MOTOR_LEFT_2_ID);
     m_motorRight1 = new VictorSPX(Constants.MOTOR_RIGHT_1_ID);
@@ -40,12 +41,6 @@ public class DriveTrain extends SubsystemBase {
 
     m_motorLeft2.follow(m_motorLeft1);
     m_motorRight2.follow(m_motorRight1);
-
-    // // WAY 1 (on one note)
-    // m_leftMotors = new SpeedControllerGroup(m_motorLeft1, m_motorLeft2);
-    // m_rightMotors = new SpeedControllerGroup(m_motorRight1, m_motorRight2);
-
-    // m_differentialDrive = new DifferentialDrive(m_leftMotors, m_rightMotors);
   }
 
   public void initDefaultCommand() {
@@ -89,6 +84,8 @@ public class DriveTrain extends SubsystemBase {
     tankDrive(leftSpeed, rightSpeed);
   }
 
+  // code based on team 254
+  // similar to the arcadeDrive, but the radius of turning stays the same at different speeds at a constant curvatureInput
   public void curvatureDrive(double throttle, double curvatureInput,
       boolean isManual) {
     

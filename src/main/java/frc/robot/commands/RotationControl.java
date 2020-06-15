@@ -18,6 +18,8 @@ import frc.robot.helperClasses.ColorSensor;
 public class RotationControl extends CommandBase {
   /**
    * Creates a new RotationControl.
+   * Requires the wheel of fortune
+   * Rotates the wheel a specified amount of times based on how many times the colours have been changed
    */
   private ColorMatchResult initialColorReading;
   private ColorMatchResult previousColorReading;

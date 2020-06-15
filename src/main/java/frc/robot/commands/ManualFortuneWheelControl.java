@@ -16,6 +16,8 @@ import frc.robot.Robot;
 public class ManualFortuneWheelControl extends CommandBase {
   /**
    * Creates a new ManualFortuneWheelControl.
+   * Requires the wheel of fortune subsystem
+   * Allows to manually control the speed and the direction of the rotation of the wheel
    */
   public ManualFortuneWheelControl() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -32,6 +34,7 @@ public class ManualFortuneWheelControl extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // rotate at the speed set by the joystick
     Robot.wheelOfFortune.rotatingMotor.set(ControlMode.PercentOutput, Robot.oi.xAxis*Constants.MANUAL_CONTROL_WHEEL_OF_FORTUNE_ROTATION_SPEED);
   }
 

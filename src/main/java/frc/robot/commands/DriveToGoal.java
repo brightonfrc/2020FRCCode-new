@@ -15,6 +15,8 @@ import frc.robot.Constants;
 public class DriveToGoal extends PIDCommand {
     /**
      * Turns to robot to the specified angle.
+     * Requires the drivetrain
+     * Drives towards the goal withoug turning. Uses PID. Encoders would have made the job easier
      *
      * @param targetAngleDegrees The angle to turn to
      * @param drive              The drive subsystem to use
@@ -40,9 +42,12 @@ public class DriveToGoal extends PIDCommand {
     }
 
     public static double getError(){
+      //gets the pitch to calculate the distance
       double pitch = Robot.pitchEntry.getDouble(0.0);
 
       System.out.println(Constants.DISTANCE_D - Robot.computerVision.getD(pitch));
+
+      // returns the difference between the desired D and the calculated D
       return Constants.DISTANCE_D - Robot.computerVision.getD(pitch);
     }
   

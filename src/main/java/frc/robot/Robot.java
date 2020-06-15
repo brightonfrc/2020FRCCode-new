@@ -69,6 +69,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    // create all the subsystems
     driveTrain = new DriveTrain();
     shooter = new Shooter();
     wheelOfFortune = new WheelOfFortune();
@@ -76,6 +77,7 @@ public class Robot extends TimedRobot {
     shooterServo = new ShooterServo();
     climber = new Climber();
 
+    // use the network tables for the computer vision
     NetworkTableInstance inst = NetworkTableInstance.getDefault();
 
     //Get the table within that instance that contains the data. There can
@@ -88,6 +90,7 @@ public class Robot extends TimedRobot {
     yawEntry = table.getEntry("yaw");
     pitchEntry = table.getEntry("pitch");
 
+    // manual controls
     oi = new OI();
 
     CommandScheduler.getInstance().setDefaultCommand(driveTrain, new DriverControls());
@@ -138,6 +141,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    // runs all the autonomous commands in a sequence
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       if(autonomousCommandSequenceIndex < autonomousCommandSequence.length){

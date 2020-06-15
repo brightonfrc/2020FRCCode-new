@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.I2C;
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
+ * 
+ * Robot constants are added
  */
 public class Constants {
   public static final int MOTOR_LEFT_1_ID = 4;

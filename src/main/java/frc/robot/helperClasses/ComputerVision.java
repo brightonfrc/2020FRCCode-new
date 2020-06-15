@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class ComputerVision  {
   /**
-   * Creates a new computerVision.
+   * Computer vision stores the values about the target, as well as helper functions to calculate important veriables used to determine how to rotate towards the target
    */
 
   private double distance_d, side_d, distance_d_adjusted, yaw_angle_adjusted;
@@ -36,6 +36,7 @@ public class ComputerVision  {
   }
 
   // TODO: change this
+  // WARNING: not implemented
   public double getAngleToTarget(){
     return 0d;
   }

@@ -15,7 +15,7 @@ import frc.robot.helperClasses.ColorSensor;
 
 public class WheelOfFortune extends SubsystemBase {
   /**
-   * Creates a new wheelOfFortune.
+   * Combines a coloursensor and a motor to turn the colourwheel
    */
 
   public VictorSPX rotatingMotor;

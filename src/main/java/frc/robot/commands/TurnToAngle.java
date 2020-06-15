@@ -16,7 +16,9 @@ import frc.robot.Constants;
 public class TurnToAngle extends PIDCommand {
     /**
      * Turns to robot to the specified angle.
-     *
+     * Requires the drivetrain
+     * Turns to a specified angle using the PID
+     * 
      * @param targetAngleDegrees The angle to turn to
      * @param drive              The drive subsystem to use
      */
@@ -35,6 +37,7 @@ public class TurnToAngle extends PIDCommand {
           // Require the drive
           Robot.driveTrain);
 
+      // reset the settings
       gyro.reset();
         getController().enableContinuousInput(-180, 180);
         getController()
@@ -47,12 +50,14 @@ public class TurnToAngle extends PIDCommand {
     }
 
     public static double getAngle(){
+      // gets and prints Gyro angle
       System.out.println(gyro.getAngle());
       return gyro.getAngle();
     }
   
     @Override
     public boolean isFinished() {
+      // checks if the desired angle is reached within the tolerance
       System.out.println(getController().getSetpoint());
       return getController().atSetpoint();
     }

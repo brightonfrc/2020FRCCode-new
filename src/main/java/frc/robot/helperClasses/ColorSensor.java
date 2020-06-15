@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.util.Color;
 import frc.robot.Constants;
 
 /**
- * Add your docs here.
+ * Colour sensor class with helper functions
  */
 public class ColorSensor{
     private ColorSensorV3 m_colorSensor;
@@ -40,6 +40,7 @@ public class ColorSensor{
         return m_colorMatcher.matchClosestColor(detectedColor);
     }
 
+    // debugs which colour is seen
     public static void debugColorMatch(ColorMatchResult result){
         // System.out.println("Red: " + result.color.red);
         // System.out.println("Green: " + result.color.green);
@@ -64,6 +65,7 @@ public class ColorSensor{
           System.out.println("Prediction: " + colorString);
     }
 
+    // determines if the colour was recognised
     public static boolean isAColour(ColorMatchResult result){
       if (result.color == Constants.BLUE_TARGET || result.color == Constants.RED_TARGET || result.color == Constants.GREEN_TARGET || result.color == Constants.YELLOW_TARGET) {
         return true;

@@ -15,6 +15,10 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Shooter extends SubsystemBase {
 
+  /**
+   * The subsystem used for the control of the shooter
+   */
+
   private final VictorSPX m_shooterLeft;
   private final VictorSPX m_shooterRight;
 
@@ -24,8 +28,6 @@ public class Shooter extends SubsystemBase {
 
     m_shooterRight.follow(m_shooterLeft);
     m_shooterRight.setInverted(true);
-
-    // startMotors();
   }
 
   @Override

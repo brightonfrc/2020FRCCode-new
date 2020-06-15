@@ -14,6 +14,8 @@ import frc.robot.Robot;
 public class Climb extends CommandBase {
   /**
    * Creates a new Climb.
+   * Requires the climber subsystem
+   * Allows to control the position of the climber, as well as lock it
    */
   public Climb() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -28,8 +30,9 @@ public class Climb extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // 5 and 6
+    // 5 and 6 are the buttons for moving the climber up and down
     double directionMultiplier;
+    // if the input is incorrect(both or none of the buttons are pressed), freeze
     if(Robot.oi.stick.getRawButton(5) && Robot.oi.stick.getRawButton(6) || !(Robot.oi.stick.getRawButton(5) || Robot.oi.stick.getRawButton(6))){
       directionMultiplier = 0;
     }else if(Robot.oi.stick.getRawButton(5)){

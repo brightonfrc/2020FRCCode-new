@@ -61,13 +61,16 @@ public class OI {
   static JoystickButton shootButton;
 
   public OI() {
+    // create a joystick
     stick = new Joystick(0);
 
+    // get the buttons
     rotationControlButton = new JoystickButton(stick, 1);
     rotationAlignButton = new JoystickButton(stick, 2);
     distanceAlignButton = new JoystickButton(stick, 3);
     manualWHeelControlButton = new JoystickButton(stick, 4);
 
+    //set the commands to run when the buttons are pressed
     rotationControlButton.whenActive(new RotationControl());
     manualWHeelControlButton.whileHeld(new ManualFortuneWheelControl());
     rotationAlignButton.whenActive(new TurnToAngleVision());
@@ -75,7 +78,7 @@ public class OI {
     // Backup
     // distanceAlignButton.whenActive(new TimeDriveToGoal());
 
-    // Pav's
+    // Pav's algorithm
     distanceAlignButton.whenActive(new Align());
     
     shootButton = new JoystickButton(stick, 8);
@@ -91,12 +94,14 @@ public class OI {
     // left joystick - x and y
     // right joystick - throttle(y), twist(x) = z
 
+    // sets the values for the axis
     xAxis = stick.getX();
     yAxis = stick.getY();
     zAxis = stick.getZ();
     twistAxis = stick.getTwist();
     throttleAxis = stick.getThrottle();
 
+    // set the exis to 0 if the joystick is released
     if(Math.abs(twistAxis) < 0.05){
       twistAxis = 0;
     }

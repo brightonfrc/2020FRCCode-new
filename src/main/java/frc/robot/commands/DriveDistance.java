@@ -8,14 +8,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.customDatatypes.DriveSignal;
-import frc.robot.subsystems.DriveTrain;
 
 public class DriveDistance extends CommandBase {
   /**
    * Creates a new DriveDistance.
+   * Requires a drivetrain
+   * Drives forward a certain distance based on time. The variables recorded are not accurate, so the command does not work. 
+   * Encoders would have made the job easier
    */
 
   private long startTime = 0;
@@ -50,12 +51,14 @@ public class DriveDistance extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    // stop the drivetrain
     Robot.driveTrain.tankDrive(DriveSignal.NEUTRAL);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // if the time eceeds or is equal to the finish time
     return timeToDrive != 0 && System.currentTimeMillis() - startTime > timeToDrive;
   }
 }

@@ -15,6 +15,8 @@ import frc.robot.customDatatypes.DriveSignal;
 public class DriverControls extends CommandBase {
   /**
    * Creates a new DriverControls.
+   * Requires the drivetrain
+   * Allows to control the robot drivetrain manually
    */
 
   public DriverControls() {
@@ -32,13 +34,14 @@ public class DriverControls extends CommandBase {
   public void execute() {
     double turn = Robot.oi.twistAxis;
 
-    // reverse when going backwards
+    // reverse turn when going backwards
     if(Robot.oi.yAxis > 0){
       turn = -turn;
     }
 
     double speedMultiplier = Constants.MANUAL_DRIVE_MULTIPLIER;
 
+    // buttons 11 or 12 can be pressed down to decrease the driving speed
     if(Robot.oi.stick.getRawButton(11) || Robot.oi.stick.getRawButton(12)){
       speedMultiplier = Constants.SLOW_MANUAL_DRIVE_MULTIPLIER;
     }

@@ -15,6 +15,8 @@ import frc.robot.customDatatypes.DriveSignal;
 public class DriveForTime extends CommandBase {
   /**
    * Creates a new SpeedTest.
+   * This command requires a drivetrain
+   * It is used to drive forward for a certain amount of time
    */
 
   protected double power;
